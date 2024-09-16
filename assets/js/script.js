@@ -4,10 +4,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const contact = document.querySelector('.contact');
 
     function closePopUp () {
-	    popUp.style.display = 'none';
+	    popUp.style.left = '-100%';
+        popUp.style.opacity = '0';
     }
     function openPopUp() {
-        popUp.style.display = 'block';
+        popUp.style.left = '0';
+        popUp.style.opacity = '1';
     }
     popUpCloseIcon.addEventListener('click', closePopUp);
     contact.addEventListener('click', openPopUp);
