@@ -44,6 +44,9 @@ body {
 .menu li a:hover {
     text-decoration: none;
 }
+.contact {
+    cursor: pointer;
+}
 .logo {
     align-self: center;
 }
@@ -51,7 +54,6 @@ body {
 .pop-up-overlay {
     position: absolute;
     width: 100%;
-    height: 100%;
     background-color: rgba(0, 0, 0, .8);
     top: 0;
     left: -100%;
