@@ -9,3 +9,7 @@ Text Domain: nathalie-mota
 */
 
 /* Ajoutez ici vos styles CSS personnalisés */
+
+body {
+    color: #000;
+}
