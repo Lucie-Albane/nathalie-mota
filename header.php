@@ -16,7 +16,7 @@
              <ul class="primary-menu-list d-flex">
                 <li> ACCUEIL </li>
                 <li> A PROPOS </li>
-                <li> CONTACT </li>
+                <li class="contact"> CONTACT </li>
             </ul>
 		<?php
 		wp_nav_menu(
