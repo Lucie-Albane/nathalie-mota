@@ -9,5 +9,6 @@
         <li> TOUS DROITS RÉSERVÉS </li>
     </ul>
 </div> <!-- .footer-wrapper -->
+<?php get_template_part( 'template_parts/contact' ); ?>
 </body>
 </html>
