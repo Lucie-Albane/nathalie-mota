@@ -29,12 +29,20 @@ body {
 .header-wrapper {
     width: 100%;
 }
-.primary-menu-list, .footer-menu {
+.menu, .footer-menu {
     list-style-type: none;
+    display: flex;
 }
-.primary-menu-list li, .footer-menu li {
+.menu li, .footer-menu li {
     padding: 15px;
     font-family: 'Space Mono';
+}
+.menu li a, .menu li a:visited {
+    color: #000;
+    text-decoration: none;
+}
+.menu li a:hover {
+    text-decoration: none;
 }
 .logo {
     align-self: center;
