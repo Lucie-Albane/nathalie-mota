@@ -29,19 +29,19 @@ body {
 .header-wrapper {
     width: 100%;
 }
-.menu, .footer-menu {
+.menu, .footer-menu-items{
     list-style-type: none;
     display: flex;
 }
-.menu li, .footer-menu li {
+.menu li, .footer-menu-items li {
     padding: 15px;
     font-family: 'Space Mono';
 }
-.menu li a, .menu li a:visited {
+.menu li a, .menu li a:visited, .footer-menu-items li a, .footer-menu-items li a:visited {
     color: #000;
     text-decoration: none;
 }
-.menu li a:hover {
+.menu li a:hover, .footer-menu-items li a:hover {
     text-decoration: none;
 }
 .contact {
@@ -126,6 +126,10 @@ body {
 }
 .footer-wrapper {
     border-top: 2px solid #000;
+}
+.footer-menu-items {
+    display: flex;
+    justify-content: space-around;
 }
 .footer-menu {
     width: 50%;

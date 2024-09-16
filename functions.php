@@ -16,15 +16,19 @@ add_action( 'wp_enqueue_scripts', 'nathalie_mota_enqueue_scripts' );
 // titres dynamiques
 add_theme_support('title-tag');
 
-// gestion du menu
+// gestion des menus
 function nathalie_mota_register_nav_menu() {
     register_nav_menu( 'primary', __( 'Primary Menu', 'nathalie-mota' ) );
+    register_nav_menu( 'footer', __( 'Footer Menu', 'nathalie-mota' ) );
+
 }
 add_action( 'after_setup_theme', 'nathalie_mota_register_nav_menu' );
 
 function add_custom_menu_item( $items, $args ) {
     if ( $args->theme_location == 'primary' ) {
         $items .= '<li class="contact">CONTACT</li>';
+    } elseif ( $args->theme_location == 'footer' ) {
+        $items .= '<li>TOUS DROITS RÉSERVÉS</li>';
     }
     return $items;
 }
