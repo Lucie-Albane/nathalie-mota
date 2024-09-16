@@ -8,8 +8,39 @@ Version: 1.0
 Text Domain: nathalie-mota
 */
 
-/* Ajoutez ici vos styles CSS personnalisés */
+/* BOITE A OUTILS */
+.d-flex {
+    display: flex;
+}
+.space-around {
+    justify-content: space-around;
+}
+.justify-center {
+    justify-content: center;
+}
 
-body {
-    color: #000;
+
+
+
+
+.header-wrapper {
+    width: 100%;
+}
+.primary-menu-list, .footer-menu {
+    list-style-type: none;
+}
+.primary-menu-list li, .footer-menu li {
+    padding: 15px;
+    font-family: 'Space Mono';
+}
+.logo {
+    align-self: center;
+}
+
+.footer-wrapper {
+    border-top: 2px solid #000;
+}
+.footer-menu {
+    width: 50%;
+    margin: auto;
 }
