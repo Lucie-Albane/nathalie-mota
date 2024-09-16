@@ -20,7 +20,6 @@ add_theme_support('title-tag');
 function nathalie_mota_register_nav_menu() {
     register_nav_menu( 'primary', __( 'Primary Menu', 'nathalie-mota' ) );
     register_nav_menu( 'footer', __( 'Footer Menu', 'nathalie-mota' ) );
-
 }
 add_action( 'after_setup_theme', 'nathalie_mota_register_nav_menu' );
 
