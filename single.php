@@ -1,50 +1,78 @@
-<?php
-/**
- * The template for displaying all single posts
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
- *
- * @package WordPress
- * @subpackage Twenty_Twenty_One
- * @since Twenty Twenty-One 1.0
- */
+<?php get_header(); ?>
+<div class="main single">
+	<?php if (have_posts()) : ?>
+	<?php while (have_posts()) : the_post(); ?>
+	<?php
+		// Champs ACF
+		$reference_photo = "reference"; // Remplacez "nom_du_champ" par le nom réel de votre champ
+		$reference_value = get_field($reference_photo);
 
-get_header();
+		$type_photo = "type";
+		$type_value = get_field($type_photo);
 
-/* Start the Loop */
-while ( have_posts() ) :
-	the_post();
+		// Champs CPT UI
+		$categorie_name = "categorie";
+		$categorie_terms = get_the_terms(get_the_ID(), $categorie_name);
 
-	get_template_part( 'template-parts/content/content-single' );
+		$format_name = "format";
+		$format_terms = get_the_terms(get_the_ID(), $format_name);
 
-	if ( is_attachment() ) {
-		// Parent post navigation.
-		the_post_navigation(
-			array(
-				/* translators: %s: Parent post link. */
-				'prev_text' => sprintf( __( '<span class="meta-nav">Published in</span><span class="post-title">%s</span>', 'twentytwentyone' ), '%title' ),
-			)
-		);
-	}
+		// Champs année
+		$year = get_the_date('Y');
+		?>
 
-	// If comments are open or there is at least one comment, load up the comment template.
-	if ( comments_open() || get_comments_number() ) {
-		comments_template();
-	}
 
-	// Previous/next post navigation.
-	$twentytwentyone_next = is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' );
-	$twentytwentyone_prev = is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' );
+	<div class="post d-flex space-between">
+		<div class="post-left d-flex flex-col">
+			<h1 class="post-title"><?php the_title(); ?></h1>
+			<div class="post-text">
+				<?php 
+				// Affiche la référence de la photo
+				if($reference_value) {
+    				echo '<p>' . $reference_photo . ': ' . $reference_value . '</p>';
+				} 
 
-	$twentytwentyone_next_label     = esc_html__( 'Next post', 'twentytwentyone' );
-	$twentytwentyone_previous_label = esc_html__( 'Previous post', 'twentytwentyone' );
+				// Affiche la catégorie de la photo
+				if (! empty($categorie_terms) && ! is_wp_error($categorie_terms)) {
+    				echo '<p>' . $categorie_name . ': ';
+    			foreach ($categorie_terms as $categorie_terms) {
+        			echo $categorie_terms->name . ' ';
+    			}
+    			echo '</p>';
+				}
 
-	the_post_navigation(
-		array(
-			'next_text' => '<p class="meta-nav">' . $twentytwentyone_next_label . $twentytwentyone_next . '</p><p class="post-title">%title</p>',
-			'prev_text' => '<p class="meta-nav">' . $twentytwentyone_prev . $twentytwentyone_previous_label . '</p><p class="post-title">%title</p>',
-		)
-	);
-endwhile; // End of the loop.
+				// Affiche le format de la photo
+				if (! empty($format_terms) && ! is_wp_error($format_terms)) {
+    				echo '<p>' . $format_name . ': ';
+    			foreach ($format_terms as $format_terms) {
+        			echo $format_terms->name . ' ';
+    			}
+    			echo '</p>';
+				}
 
-get_footer();
+				// Affiche le type de la photo
+				if($type_value) {
+    				echo '<p>' . $type_photo . ': ' . $type_value . '</p>';
+				} 
+
+				// Affiche l'anneé de la publication de la photo
+				echo '<p>Année: ' . $year . '</p>';
+				?>
+			</div>
+		</div>
+		<div class="post-image">
+			<?php the_content(); ?>
+		</div>
+	</div>
+	<div class="post-contact d-flex">
+		<p>Cette photo vous intéresse ?</p>
+		<button class="contact single-contact-btn">Contact</button>
+	</div>
+	<div class="post-similar">
+		<h3>Vous aimerez aussi</h3>
+	</div>
+
+<?php endwhile; ?>
+<?php endif; ?>
+</div>
+<?php get_footer(); ?>

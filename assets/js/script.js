@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const popUp = document.querySelector('.pop-up-overlay');
     const popUpCloseIcon = document.querySelector('.toggle-btn');
-    const contact = document.querySelector('.contact');
+    const contact = document.querySelectorAll('.contact');
 
     function closePopUp () {
 	    popUp.style.left = '-100%';
@@ -11,6 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
         popUp.style.left = '0';
         popUp.style.opacity = '1';
     }
+
     popUpCloseIcon.addEventListener('click', closePopUp);
-    contact.addEventListener('click', openPopUp);
+
+    contact.forEach(element => {
+        element.addEventListener('click', openPopUp);
+    });
 });
