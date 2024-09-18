@@ -4,7 +4,7 @@
 	<?php while (have_posts()) : the_post(); ?>
 	<?php
 		// Champs ACF
-		$reference_photo = "reference"; // Remplacez "nom_du_champ" par le nom réel de votre champ
+		$reference_photo = "reference"; 
 		$reference_value = get_field($reference_photo);
 
 		$type_photo = "type";
@@ -66,7 +66,7 @@
 	</div>
 	<div class="post-photo-contact d-flex">
 		<p>Cette photo vous intéresse ?</p>
-		<button class="contact single-contact-btn">Contact</button>
+		<button class="contact single-contact-btn" data-reference="<?php echo $reference_value; ?>">Contact</button>
 	</div>
 	<div class="post-photo-similar">
 		<h3>Vous aimerez aussi</h3>
