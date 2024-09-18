@@ -138,35 +138,35 @@ body {
     width: 50%;
     margin: auto;
 }
-.single {
+.single-photo {
     font-family: 'Space Mono';
     font-weight: 400;
     width: 90%;
     margin: auto;
 }
-.post-title {
+.post-photo-title {
     text-transform: uppercase;
     font-style: italic;
     font-size: 66px;
 }
-.post-left {
+.post-photo-left {
     margin-right: 20px;
 }
-.post-text p {
+.post-photo-text p {
     text-transform: uppercase;
     font-size: 14px;
     line-height: 20px;
 }
-.post-text {
+.post-photo-text {
     padding-bottom: 40px;
 }
-.post-image, .post-left {
+.post-photo-image, .post-left {
     width: 50%;
 }
-.post {
+.post-photo {
     align-items:flex-end;
 }
-.post-text, .post-contact {
+.post-photo-text, .post-contact {
     border-bottom: 2px solid #000;
 }
 .single-contact-btn {
@@ -178,13 +178,13 @@ body {
     font-family: 'Space Mono';
     margin-left : 20px;
 }
-.post-contact {
+.post-photo-contact {
     padding: 40px 0;
 }
-.post-contact p {
+.post-photo-contact p {
     font-family: 'Poppins';
 }
-.post-similar h3 {
+.post-photo-similar h3 {
     text-transform: uppercase;
     font-weight: 400;
 }
