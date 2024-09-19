@@ -186,10 +186,60 @@ body {
 .post-photo-contact p {
     font-family: 'Poppins';
 }
+.post-photo-similar {
+    margin-bottom: 70px;
+}
 .post-photo-similar h3 {
     text-transform: uppercase;
     font-weight: 400;
 }
 :where(figure) {
     margin: 0;
+}
+.post-photo-similar-images,
+.photo-block {
+    position: relative;
+}
+
+.photo-block-overlay {
+    background-color: rgba(0, 0, 0, .6);
+    position: absolute;
+    width: 565px;
+    height: 565px;
+    color: #fff;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.photo-block:hover .photo-block-overlay {
+    opacity: 1;
+}
+
+.photo-block-overlay:nth-of-type(1) {
+    top: 0;
+    left: 0;
+}
+
+.photo-block-overlay:nth-of-type(2) {
+    top: 0;
+    right: 0;
+}
+.fullscreen-icon {
+    justify-content: flex-end;
+}
+.info-photo, .fullscreen-icon {
+    padding: 10px;
+}
+.photo-block-overlay p, .photo-block p {
+    margin: 0;
+    text-transform: uppercase;
+}
+.photo-block img {
+    width: 565px;
+    height: 565px;
+    object-fit: cover;
+}
+.photo-block a:visited, .photo-block a:hover, .photo-block a{
+    color:#fff;
 }

@@ -70,7 +70,7 @@
 	</div>
 	<div class="post-photo-similar">
 		<h3>Vous aimerez aussi</h3>
-		<div class="post-photo-similar-images d-flex">
+		<div class="post-photo-similar-images d-flex space-between">
 			<?php 
 				$args = array (
 					'post_type' => 'photo',
@@ -90,8 +90,7 @@
 					while ($similar_photos -> have_posts()) {
 						$similar_photos -> the_post();
 				?>
-				<div> <?php get_template_part( 'template_parts/photo_block' ); ?>
-				</div>
+				<?php get_template_part( 'template_parts/photo_block' ); ?>
 				<?php
 					}
 				}
