@@ -70,6 +70,32 @@
 	</div>
 	<div class="post-photo-similar">
 		<h3>Vous aimerez aussi</h3>
+		<div class="post-photo-similar-images d-flex">
+			<?php 
+				$args = array (
+					'post_type' => 'photo',
+					'posts_per_page' => 2,
+					'tax_query' => array(
+						array (
+							'taxonomy' => 'categorie',
+							'field' => 'slug',
+							'terms' => $categorie_terms,
+						),
+					)
+				);
+				$similar_photos = new WP_Query($args);
+
+				if ($similar_photos -> have_posts()) {
+					while ($similar_photos -> have_posts()) {
+						$similar_photos -> the_post();
+				?>
+				<div> <?php the_content() ?> </div>
+				<?php
+					}
+				}
+				wp_reset_postdata();
+			?>
+		</div>
 	</div>
 
 <?php endwhile; ?>

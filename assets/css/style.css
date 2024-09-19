@@ -179,7 +179,9 @@ body {
     margin-left : 20px;
 }
 .post-photo-contact {
+    height: 118px;
     padding: 40px 0;
+    width: 100%;
 }
 .post-photo-contact p {
     font-family: 'Poppins';
