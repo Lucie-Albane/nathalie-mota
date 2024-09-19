@@ -75,6 +75,7 @@
 				$args = array (
 					'post_type' => 'photo',
 					'posts_per_page' => 2,
+					'post__not_in' => array(get_the_ID()),
 					'tax_query' => array(
 						array (
 							'taxonomy' => 'categorie',
@@ -89,7 +90,8 @@
 					while ($similar_photos -> have_posts()) {
 						$similar_photos -> the_post();
 				?>
-				<div> <?php the_content() ?> </div>
+				<div> <?php get_template_part( 'template_parts/photo_block' ); ?>
+				</div>
 				<?php
 					}
 				}
