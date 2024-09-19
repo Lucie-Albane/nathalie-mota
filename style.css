@@ -181,7 +181,7 @@ body {
 .post-photo-contact {
     height: 118px;
     width: 50%;
-    align-content: center;
+    align-content: flex-end;
     flex-wrap: wrap;
 }
 .post-photo-navigation {
