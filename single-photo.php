@@ -64,9 +64,23 @@
 			<?php the_content(); ?>
 		</div>
 	</div>
-	<div class="post-photo-contact d-flex">
-		<p>Cette photo vous intéresse ?</p>
-		<button class="contact single-contact-btn" data-reference="<?php echo $reference_value; ?>">Contact</button>
+	<div class="d-flex">
+		<div class="post-photo-contact d-flex">
+			<p>Cette photo vous intéresse ?</p>
+			<button class="contact single-contact-btn" data-reference="<?php echo $reference_value; ?>">Contact</button>
+		</div>
+		<div class="post-photo-navigation d-flex">
+		<?php 
+		$next_photo = get_next_post();
+		$previous_photo = get_previous_post();
+		the_post_navigation( array(
+ 			'prev_text'  => __( 'PRECEDENT' . '<span class="post-photo-navigation-thumbnail">'
+			 . get_the_post_thumbnail($previous_photo->ID,'thumbnail') . '</span>'),
+ 			'next_text'  => __( 'SUIVANT' . '<span class="post-photo-navigation-thumbnail">'
+			 . get_the_post_thumbnail($next_photo->ID,'thumbnail') . '</span>'),
+ 		) );
+		?>
+		</div>
 	</div>
 	<div class="post-photo-similar">
 		<h3>Vous aimerez aussi</h3>
