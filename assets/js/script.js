@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     popUp.addEventListener('click', closePopUp);
 
-    contactPhoto.addEventListener('click', () => {
+    contactPhoto.addEventListener('click', function () {
         const reference = contactPhoto.getAttribute('data-reference');
         openPopUpPhoto(reference);
     });    
