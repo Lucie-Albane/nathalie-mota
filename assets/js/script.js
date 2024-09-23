@@ -4,13 +4,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const contactPhoto = document.querySelector('.single-contact-btn');
     const referenceInput = document.querySelector('.ref-photo');
     const popUpContent = document.querySelector('.pop-up');
+    const burgerMenu = document.querySelector('.burger-menu');
+    const mobileMenu = document.querySelector('.primary-menu-mobile');
 
     function closePopUp () {
         popUp.style.left = '-100%';
         popUp.style.opacity = '0';
         referenceInput.value = '';
     }
-
+    
     function openPopUp() {
         popUp.style.left = '0';
         popUp.style.opacity = '1';
@@ -38,4 +40,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const reference = contactPhoto.getAttribute('data-reference');
         openPopUpPhoto(reference);
     });
+
+    function openBurgerMenu() {
+        mobileMenu.style.opacity = '1';
+    };
+
+    burgerMenu.addEventListener('click', openBurgerMenu);
 });
