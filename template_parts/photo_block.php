@@ -18,7 +18,7 @@
                 if (! empty($categorie_terms) && ! is_wp_error($categorie_terms)) {
     			    foreach ($categorie_terms as $categorie_terms) {
         			    echo $categorie_terms->name;
-    			    };} ?></p>
+    			};} ?></p>
         </div>
     </div>
 </div>

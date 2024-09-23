@@ -21,7 +21,6 @@
 		$year = get_the_date('Y');
 		?>
 
-
 	<div class="post-photo d-flex space-between">
 		<div class="post-photo-left d-flex flex-col">
 			<h1 class="post-photo-title"><?php the_title(); ?></h1>
@@ -73,43 +72,54 @@
 		<?php 
 		$next_photo = get_next_post();
 		$previous_photo = get_previous_post();
+		
+		$prev_text = 'PRECEDENT';
+		if (is_object($previous_photo)) {
+			$prev_text .= '<span class="post-photo-navigation-thumbnail">' . get_the_post_thumbnail($previous_photo->ID,'thumbnail') . '</span>';
+		}
+		
+		$next_text = 'SUIVANT';
+		if (is_object($next_photo)) {
+			$next_text .= '<span class="post-photo-navigation-thumbnail">' . get_the_post_thumbnail($next_photo->ID,'thumbnail') . '</span>';
+		}
+		
 		the_post_navigation( array(
- 			'prev_text'  => __( 'PRECEDENT' . '<span class="post-photo-navigation-thumbnail">'
-			 . get_the_post_thumbnail($previous_photo->ID,'thumbnail') . '</span>'),
- 			'next_text'  => __( 'SUIVANT' . '<span class="post-photo-navigation-thumbnail">'
-			 . get_the_post_thumbnail($next_photo->ID,'thumbnail') . '</span>'),
- 		) );
+			'prev_text'  => __( $prev_text ),
+			'next_text'  => __( $next_text ),
+		) );
 		?>
 		</div>
 	</div>
-	<div class="post-photo-similar">
-		<h3>Vous aimerez aussi</h3>
-		<div class="post-photo-similar-images d-flex space-between">
-			<?php 
-				$args = array (
-					'post_type' => 'photo',
-					'posts_per_page' => 2,
-					'post__not_in' => array(get_the_ID()),
-					'tax_query' => array(
-						array (
-							'taxonomy' => 'categorie',
-							'field' => 'slug',
-							'terms' => $categorie_terms,
-						),
-					)
-				);
-				$similar_photos = new WP_Query($args);
+	<?php 
+	$args = array (
+		'post_type' => 'photo',
+		'posts_per_page' => 2,
+		'post__not_in' => array(get_the_ID()),
+		'tax_query' => array(
+			array (
+				'taxonomy' => 'categorie',
+				'field' => 'slug',
+				'terms' => $categorie_terms,
+			),
+		)
+	);
+	$similar_photos = new WP_Query($args);
 
-				if ($similar_photos -> have_posts()) {
-					while ($similar_photos -> have_posts()) {
-						$similar_photos -> the_post();
-				?>
-				<?php get_template_part( 'template_parts/photo_block' ); ?>
-				<?php
-					}
-				}
-				wp_reset_postdata();
-			?>
+	?>
+	<?php 
+		if ($similar_photos->have_posts()) {
+			echo '<div class="post-photo-similar">
+		<h3>Vous aimerez aussi</h3>
+		<div class="post-photo-similar-images d-flex space-between">';
+			while ($similar_photos->have_posts()) {
+				$similar_photos->the_post();
+	?>
+	<?php get_template_part('template_parts/photo_block'); ?>
+	<?php
+			}
+		}
+		wp_reset_postdata();
+	?>
 		</div>
 	</div>
 
