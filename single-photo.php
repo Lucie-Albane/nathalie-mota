@@ -63,7 +63,7 @@
 			<?php the_content(); ?>
 		</div>
 	</div>
-	<div class="d-flex">
+	<div class="contact-nav d-flex">
 		<div class="post-photo-contact d-flex">
 			<p>Cette photo vous intéresse ?</p>
 			<button class="contact single-contact-btn" data-reference="<?php echo $reference_value; ?>">Contact</button>
@@ -110,7 +110,7 @@
 		if ($similar_photos->have_posts()) {
 			echo '<div class="post-photo-similar">
 		<h3>Vous aimerez aussi</h3>
-		<div class="post-photo-similar-images d-flex space-between">';
+		<div class="post-photo-similar-images d-flex space-between flex-col-mobile">';
 			while ($similar_photos->have_posts()) {
 				$similar_photos->the_post();
 	?>

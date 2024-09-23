@@ -24,18 +24,88 @@ Text Domain: nathalie-mota
 .justify-center {
     justify-content: center;
 }
+@media only screen and (max-width: 767px) {
+    .flex-col-mobile {
+        flex-direction: column;
+    }
+}
+
+/*  GÉNÉRAL */
 
 body {
     margin: 0;
     padding: 0;
 }
+.page {
+    width: 100%;
+}
+h1 {
+    font-family: 'Space Mono';
+    font-weight: 700;
+    font-style: italic;
+    font-size: 96px;
+}
+h2 {
+    font-family: 'Space Mono';
+    font-weight: 400;
+    font-style: italic;
+    font-size: 66px;
+}
+h3 {
+    font-family: 'Space Mono';
+    font-weight: 400;
+    font-size: 18px;
+}
+button {
+    background-color: #D8D8D8;
+    color: #000;
+    font-family: 'Space Mono';
+    font-size: 12px;
+    font-weight: 400;
+    transition: all .3s ease-in-out;
+}
+button:hover {
+    background-color: #000;
+    color: #fff;
+}
+@media only screen and (max-width: 767px) {
+    h1 {
+        font-family: 'Space Mono';
+        font-weight: 700;
+        font-style: italic;
+        font-size: 28px;
+    }
+    h2 {
+        font-family: 'Space Mono';
+        font-weight: 400;
+        font-style: italic;
+        font-size: 46px;
+    }
+    h3 {
+        font-family: 'Space Mono';
+        font-weight: 400;
+        font-size: 18px;
+    }
+}
 .header-wrapper {
     width: 100%;
+    box-shadow: 0px 3px 18px 4px rgba(0,0,0,0.03);
 }
 .menu, .footer-menu-items{
     list-style-type: none;
     display: flex;
 }
+.footer-menu-items {
+    padding: 0;
+}
+@media only screen and (max-width: 767px) {
+    .footer-menu-items {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
 .menu li, .footer-menu-items li {
     padding: 15px;
     font-family: 'Space Mono';
@@ -57,22 +127,27 @@ body {
 .pop-up-overlay {
     position: fixed;
     width: 100%;
-    max-height: 100vh;
+    min-height: 100vh;
     background-color: rgba(0, 0, 0, .8);
     top: 0;
-    left: 0;
-    opacity: 1;
+    left: -100%;
+    opacity: 0;
     transition: all 1s ease-in-out;
     z-index: 3;
 }
 .pop-up {
     position: relative;
     width: 50%;
-    max-height: 100vh;
+    height: 100%;
     margin: auto;
     background-color: #fff;
     border: 5px solid #000;
     z-index: 5;
+}
+@media only screen and (max-width: 767px) {
+    .pop-up {
+        width: 100%;
+    }
 }
 .toggle-btn {
     position: absolute;
@@ -144,7 +219,7 @@ body {
     width: 50%;
     margin: auto;
 }
-.single-photo {
+.main {
     font-family: 'Space Mono';
     font-weight: 400;
     width: 90%;
@@ -154,9 +229,6 @@ body {
     text-transform: uppercase;
     font-style: italic;
     font-size: 66px;
-}
-.post-photo-left {
-    margin-right: 20px;
 }
 .post-photo-text p {
     text-transform: uppercase;
@@ -169,11 +241,33 @@ body {
 .post-photo-image, .post-left {
     width: 50%;
 }
+@media only screen and (max-width: 767px) {
+    .post-photo-image, .post-left {
+        width: 100%;
+    }
+}
 .post-photo {
     align-items:flex-end;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+@media only screen and (max-width: 767px) {
+    .post-photo {
+        width: 100%;
+        align-items: flex-start;
+        flex-direction: column-reverse;
+    }
 }
 .post-photo-text, .post-contact {
     border-bottom: 2px solid #000;
+}
+@media only screen and (max-width: 767px) {
+    .contact-nav {
+        flex-direction: column;
+    }
+    .post-photo-navigation, .post-photo-contact {
+        width: 100% !important;
+    }
 }
 .single-contact-btn {
     width: 270px;
@@ -183,6 +277,11 @@ body {
     border: none;
     font-family: 'Space Mono';
     margin-left : 20px;
+}
+@media only screen and (max-width: 767px) {
+    .single-contact-btn {
+        margin-left: 0;
+    }
 }
 .post-photo-contact {
     height: 118px;
@@ -224,6 +323,11 @@ body {
 .post-photo-similar {
     margin-bottom: 70px;
 }
+@media only screen and (max-width: 767px) {
+    .post-photo-similar {
+        margin-bottom: 0;
+    }
+}
 .post-photo-similar h3 {
     text-transform: uppercase;
     font-weight: 400;
@@ -239,8 +343,8 @@ body {
 .photo-block-overlay {
     background-color: rgba(0, 0, 0, .6);
     position: absolute;
-    width: 565px;
-    height: 565px;
+    width: 100%;
+    height: 100%;
     color: #fff;
     z-index: 2;
     opacity: 0;
@@ -274,6 +378,11 @@ body {
     width: 565px;
     height: 565px;
     object-fit: cover;
+}
+@media only screen and (max-width: 767px) {
+    .photo-block img {
+        margin-bottom: 20px;
+    }
 }
 a, a:visited, a:hover{
     color:inherit;
