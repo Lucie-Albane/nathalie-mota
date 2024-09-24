@@ -15,5 +15,24 @@
         }
     } ?>
 </div>
+<div class="photos-list d-flex justify-center">
+<?php $args = array (
+		'post_type' => 'photo',
+        'posts_per_page' => 8,
+
+	);
+	$all_photos = new WP_Query($args);
+
+    if ($all_photos->have_posts()) {
+        while ($all_photos->have_posts()) {
+            $all_photos->the_post();
+?>
+<?php get_template_part('template_parts/photo_block'); ?>
+<?php
+        }
+    }
+    wp_reset_postdata();
+?>
+</div>
 
 <?php get_footer(); ?>

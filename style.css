@@ -398,7 +398,9 @@ img, .wp-block-image img {
 .photo-block {
     position: relative;
 }
-
+.photo-block {
+    width: max-content;
+}
 .photo-block-overlay {
     background-color: rgba(0, 0, 0, .6);
     position: absolute;
@@ -464,4 +466,11 @@ a, a:visited, a:hover{
     object-fit: cover;
     width: 100%;
     height: 100%;
+}
+.photos-list {
+    margin: auto;
+    flex-wrap: wrap;
+}
+.photos-list .photo-block {
+    margin: 20px;
 }
