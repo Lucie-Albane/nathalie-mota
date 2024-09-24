@@ -34,5 +34,8 @@
     wp_reset_postdata();
 ?>
 </div>
+<div class="load d-flex justify-center">
+    <button id="more_posts" class="load-btn">Charger plus</button>
+</div>
 
 <?php get_footer(); ?>

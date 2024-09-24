@@ -39,3 +39,25 @@ function add_custom_menu_item( $items, $args ) {
     return $items;
 }
 add_filter( 'wp_nav_menu_items', 'add_custom_menu_item', 10, 2 );
+
+// chargement des photos supplémentaires sur la page d'accueil
+function load_more_photos() {
+    $offset = $_POST['offset'];
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => 8,
+        'offset' => $offset,
+    );
+    $more_photos = new WP_Query($args);
+
+    if ($more_photos->have_posts()) {
+        while ($more_photos->have_posts()) {
+            $more_photos->the_post();
+            get_template_part('template_parts/photo_block');
+        }
+    }
+    wp_reset_postdata();
+    wp_die();
+}
+add_action('wp_ajax_load_more_photos', 'load_more_photos');
+add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');

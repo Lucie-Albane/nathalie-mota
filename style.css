@@ -410,6 +410,7 @@ img, .wp-block-image img {
     z-index: 2;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
+    font-family: 'Space Mono';
 }
 
 .photo-block:hover .photo-block-overlay {
@@ -473,4 +474,9 @@ a, a:visited, a:hover{
 }
 .photos-list .photo-block {
     margin: 20px;
+}
+
+.load-btn {
+    width: 257px;
+    height: 50px;
 }

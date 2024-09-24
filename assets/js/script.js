@@ -51,5 +51,35 @@ document.addEventListener('DOMContentLoaded', function () {
             openPopUpPhoto(reference);
         });
     }
+});
 
+document.addEventListener('DOMContentLoaded', function() {
+    // nombre de posts supplémentaires à afficher
+    let offset = 8; 
+    const morePostsButton = document.getElementById('more_posts');
+    morePostsButton.addEventListener('click', function(e) {
+        // arrête le comportement par défaut
+        e.preventDefault();
+        // fetch = fonction JS qui permet de faire des requêtes http vers un serveur et récupérer des données
+        fetch(ajaxurl, {
+            // méthode http qui permet d'envoyer des données vers un serveur
+            method: 'POST',
+            // spécifie le type de données
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache'
+            },
+            // récupère "load more photos" du fichier functions.php + le nombre de posts à afficher
+            body: 'action=load_more_photos&offset=' + offset
+        })
+        // gère les promesses renvoyées par fetch : il extrait le contenu de la promesse sous forme de texte 
+        // (ici la requete ajax : la récupératoin de données)
+        .then(response => response.text())
+        // récupère le contenu de la réponse à la requête ajax et l'injecte dans la liste des photos
+        .then(data => {
+            const photosList = document.querySelector('.photos-list');
+            photosList.innerHTML += data;
+            offset += 8;
+        });
+    });
 });
