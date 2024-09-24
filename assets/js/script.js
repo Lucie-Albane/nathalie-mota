@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const toggleButton = document.querySelector('.toggle-btn');
     const popUp = document.querySelector('.pop-up-overlay');
     const contact = document.querySelector('.contact');
     const contactPhoto = document.querySelector('.single-contact-btn');
@@ -31,19 +32,22 @@ document.addEventListener('DOMContentLoaded', function () {
             closePopUp();
         }
     });
+    toggleButton.addEventListener('click', closePopUp);
 
     popUpContent.addEventListener('click', function(event) {
         event.stopPropagation();
     });
 
-    contactPhoto.addEventListener('click', function () {
-        const reference = contactPhoto.getAttribute('data-reference');
-        openPopUpPhoto(reference);
-    });
-
     function openBurgerMenu() {
-        mobileMenu.style.opacity = '1';
+        mobileMenu.classList.toggle('active');
     };
-
     burgerMenu.addEventListener('click', openBurgerMenu);
+
+    if(contactPhoto) {
+        contactPhoto.addEventListener('click', function () {
+            const reference = contactPhoto.getAttribute('data-reference');
+            openPopUpPhoto(reference);
+        });
+    }
+
 });
