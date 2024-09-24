@@ -66,7 +66,7 @@
 	<div class="contact-nav d-flex">
 		<div class="post-photo-contact d-flex">
 			<p>Cette photo vous intéresse ?</p>
-			<button class="contact single-contact-btn" data-reference="<?php echo $reference_value; ?>">Contact</button>
+			<button class="single-contact-btn" data-reference="<?php echo $reference_value; ?>">Contact</button>
 		</div>
 		<div class="post-photo-navigation d-flex">
 		<?php 

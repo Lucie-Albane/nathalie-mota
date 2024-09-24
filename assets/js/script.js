@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const toggleButton = document.querySelector('.toggle-btn');
     const popUp = document.querySelector('.pop-up-overlay');
-    const contact = document.querySelector('.contact');
+    const contactButtons = document.querySelectorAll('.contact');
     const contactPhoto = document.querySelector('.single-contact-btn');
     const referenceInput = document.querySelector('.ref-photo');
     const popUpContent = document.querySelector('.pop-up');
@@ -25,7 +25,9 @@ document.addEventListener('DOMContentLoaded', function () {
         referenceInput.value = reference;
     }
 
-    contact.addEventListener('click', openPopUp);
+    contactButtons.forEach(button => {
+        button.addEventListener('click', openPopUp);
+    });
 
     popUp.addEventListener('click', function(event) {
         if (event.target === popUp) {
