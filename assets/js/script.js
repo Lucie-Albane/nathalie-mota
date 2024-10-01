@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function openBurgerMenu() {
         mobileMenu.classList.toggle('active');
+        burgerMenu.classList.toggle('open');
     };
     burgerMenu.addEventListener('click', openBurgerMenu);
 
@@ -56,11 +57,12 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function() {
     // nombre de posts supplémentaires à afficher
     let offset = 8; 
+    let morePosts = true;
     const morePostsButton = document.getElementById('more_posts');
-    morePostsButton.addEventListener('click', function(e) {
-        // arrête le comportement par défaut
-        e.preventDefault();
-        // fetch = fonction JS qui permet de faire des requêtes http vers un serveur et récupérer des données
+    const load = document.querySelector('.load');
+    morePostsButton.addEventListener('click', function() {
+        if(morePosts) {
+            // fetch = fonction JS qui permet de faire des requêtes http vers un serveur et récupérer des données
         fetch(ajaxurl, {
             // méthode http qui permet d'envoyer des données vers un serveur
             method: 'POST',
@@ -77,9 +79,16 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.text())
         // récupère le contenu de la réponse à la requête ajax et l'injecte dans la liste des photos
         .then(data => {
-            const photosList = document.querySelector('.photos-list');
-            photosList.innerHTML += data;
-            offset += 8;
+            if (data.trim() === '') {
+                morePosts = false;
+                morePostsButton.style.display = 'none';
+                load.innerHTML += '<p> Il n\'y a plus de photo à afficher</p>';
+            } else {
+                const photosList = document.querySelector('.photos-list');
+                photosList.innerHTML += data;
+                offset += 8;
+            }
         });
+        }
     });
 });

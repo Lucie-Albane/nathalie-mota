@@ -12,7 +12,7 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
-    <div class="header-wrapper d-flex space-around">
+    <div class="header-wrapper d-flex space-around align-center">
         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" class="logo" alt="logo de Nathalie Mota">
 	    <div id="site-navigation" class="primary-navigation">
 		<?php
@@ -24,7 +24,7 @@
 		?>
 	    </div><!-- #site-navigation -->
 		<div id="site-navigation-mobile" class="mobile-navigation">
-			<div class="burger-menu">BURGER</div>
+			<div class="burger-menu"></div>
 		<?php
 		wp_nav_menu( array(
             'theme_location' => 'primary',

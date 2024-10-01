@@ -55,7 +55,7 @@ function load_more_photos() {
             $more_photos->the_post();
             get_template_part('template_parts/photo_block');
         }
-    }
+    } 
     wp_reset_postdata();
     wp_die();
 }
