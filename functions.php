@@ -61,3 +61,69 @@ function load_more_photos() {
 }
 add_action('wp_ajax_load_more_photos', 'load_more_photos');
 add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
+
+
+// Filtrage des photos de la page d'accueil
+function get_posts_by_term() {
+    $categorie_terms = sanitize_text_field($_GET['categorie_terms']);
+    $format_terms = sanitize_text_field($_GET['format_terms']);
+    $offset = sanitize_text_field($_GET['offset']);
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => 8,
+        'offset' => $offset,
+        'tax_query' => array(
+            'relation' => 'AND',
+        ),
+    );
+    if (!empty($categorie_terms)) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'categorie',
+            'field' => 'name',
+            'terms' => $categorie_terms,
+        );
+    }
+    if (!empty($format_terms)) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'format',
+            'field' => 'name',
+            'terms' => $format_terms,
+        );
+    }
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            get_template_part('template_parts/photo_block');
+        }
+    }
+
+    wp_reset_postdata();
+    wp_die();
+}
+add_action('wp_ajax_get_posts_by_term', 'get_posts_by_term');
+add_action('wp_ajax_nopriv_get_posts_by_term', 'get_posts_by_term');
+
+// Retrieving all posts
+function get_all_posts() {
+    $offset = sanitize_text_field($_GET['offset']);
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => 999,
+        'offset' => $offset,
+    );
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            get_template_part('template_parts/photo_block');
+        }
+    }
+
+    wp_reset_postdata();
+    wp_die();
+}
+add_action('wp_ajax_get_all_posts', 'get_all_posts');
+add_action('wp_ajax_nopriv_get_all_posts', 'get_all_posts');

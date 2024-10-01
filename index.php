@@ -29,15 +29,34 @@
             <div class="filters d-flex">
                 <select name="filter-categories" id="filter-categories">
                     <option value="">CATÉGORIE</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                    <?php 
+		                $terms = get_terms( array(
+                            'taxonomy' => 'categorie',
+                            'hide_empty' => false,
+                        ) );
+                        
+                        if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+                            foreach ( $terms as $term ) {
+                                echo '<option value=' . $term->name . '>' . $term->name . '</option>';
+                            }
+                        }
+                    ?>
                 </select>
+                
                 <select name="filter-formats" id="filter-formats">
                     <option value="">FORMATS</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                    <?php 
+		                $terms = get_terms( array(
+                            'taxonomy' => 'format',
+                            'hide_empty' => false,
+                        ) );
+                        
+                        if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+                            foreach ( $terms as $term ) {
+                                echo '<option value=' . $term->name . '>' . $term->name . '</option>';
+                            }
+                        }
+                    ?>
                 </select> 
             </div>
             <div class="sort">
