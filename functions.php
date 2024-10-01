@@ -67,11 +67,12 @@ add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
 function get_posts_by_term() {
     $categorie_terms = sanitize_text_field($_GET['categorie_terms']);
     $format_terms = sanitize_text_field($_GET['format_terms']);
-    $offset = sanitize_text_field($_GET['offset']);
+    $sort_by = sanitize_text_field($_GET['sort_by']);
     $args = array(
         'post_type' => 'photo',
-        'posts_per_page' => 8,
-        'offset' => $offset,
+        'posts_per_page' => 999,
+        'offset' => 0,
+        'orderby' => 'date',
         'tax_query' => array(
             'relation' => 'AND',
         ),
@@ -90,6 +91,10 @@ function get_posts_by_term() {
             'terms' => $format_terms,
         );
     }
+    if (!empty($sort_by)) {
+        $args['order'] = $sort_by;
+    }
+
     $query = new WP_Query($args);
 
     if ($query->have_posts()) {
@@ -97,6 +102,10 @@ function get_posts_by_term() {
             $query->the_post();
             get_template_part('template_parts/photo_block');
         }
+    } else {
+        echo '<div class="load d-flex justify-center">
+            <p>Il n\'y a pas de photo à afficher avec ce filtrage, essayez autre chose.</p>
+        </div>';
     }
 
     wp_reset_postdata();
@@ -105,13 +114,11 @@ function get_posts_by_term() {
 add_action('wp_ajax_get_posts_by_term', 'get_posts_by_term');
 add_action('wp_ajax_nopriv_get_posts_by_term', 'get_posts_by_term');
 
-// Retrieving all posts
+// Récupérer tous les posts
 function get_all_posts() {
-    $offset = sanitize_text_field($_GET['offset']);
     $args = array(
         'post_type' => 'photo',
         'posts_per_page' => 999,
-        'offset' => $offset,
     );
     $query = new WP_Query($args);
 

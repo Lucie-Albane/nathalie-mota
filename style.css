@@ -415,6 +415,12 @@ img, .wp-block-image img {
 .photo-block {
     width: max-content;
 }
+@media only screen and (max-width: 767px) {
+    .photo-block{
+        margin: 10px !important;
+        width: 100%;
+    }
+}
 .photo-block-overlay {
     background-color: rgba(0, 0, 0, .6);
     position: absolute;
@@ -471,9 +477,7 @@ img, .wp-block-image img {
 }
 @media only screen and (max-width: 767px) {
     .photo-block img {
-        margin-bottom: 20px;
-        width: 100vw;
-        height:auto;
+        width: 100%;
     }
 }
 a, a:visited, a:hover{
@@ -516,6 +520,7 @@ a, a:visited, a:hover{
 }
 .load p{
     font-family: 'Space Mono';
+    text-align: center;
 }
 .filters-and-photos {
     width: 96%;
@@ -548,6 +553,20 @@ a, a:visited, a:hover{
 }
 .filters {
     margin-left: 20px;
+}
+@media only screen and (max-width: 767px) {
+    .sort, .filters {
+        margin: 0;
+    }
+    .all-filters {
+        align-items: center;
+    }
+    #filter-categories {
+        margin: 0;
+    }
+    .all-filters select, .filters select {
+        margin-bottom: 20px !important;
+    }
 }
 .sort-and-filters {
     margin: 40px 0 20px 0;

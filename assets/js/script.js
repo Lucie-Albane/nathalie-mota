@@ -94,20 +94,23 @@ document.addEventListener('DOMContentLoaded', function () {
     // Gestion des filtres :
     const filterCategories = document.getElementById('filter-categories');
     const filterFormats = document.getElementById('filter-formats');
+    const filterSort = document.getElementById('sort-by');
     
     filterCategories.addEventListener('change', updatePhotos);
     filterFormats.addEventListener('change', updatePhotos);
+    filterSort.addEventListener('change', updatePhotos);
     
     function updatePhotos() {
         const selectedCategorie = filterCategories.value;
         const selectedFormat = filterFormats.value;
-        let url;
-        if (selectedCategorie === '' && selectedFormat !== '') {
-            url = `${ajaxurl}?action=get_posts_by_term&format_terms=${selectedFormat}`;
-        } else if (selectedCategorie === '' && selectedFormat === '') {
-            url = `${ajaxurl}?action=get_all_posts`;
-        } else {
-            url = `${ajaxurl}?action=get_posts_by_term&categorie_terms=${selectedCategorie}&format_terms=${selectedFormat}`;
+        const selectedSort = filterSort.value;
+    
+        let url = `${ajaxurl}?action=get_posts_by_term&sort_by=${selectedSort}`;
+        if (selectedCategorie !== '') {
+            url += `&categorie_terms=${selectedCategorie}`;
+        }
+        if (selectedFormat !== '') {
+            url += `&format_terms=${selectedFormat}`;
         }
     
         fetch(url)
@@ -115,12 +118,12 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 const photosList = document.querySelector('.photos-list');
                 photosList.innerHTML = data;
-                offset = data.trim().length;
-                morePosts = false;
+                offset = 8;
+                morePosts = true;
                 morePostsButtons.forEach(button => {
-                    button.style.display = 'none';
+                    button.style.display = 'block';
                 });
                 load.innerHTML = '';
-        });
+            });
     }
 });

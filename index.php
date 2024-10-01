@@ -25,8 +25,8 @@
 
 <div class="filters-and-photos d-flex flex-col">
     <div class="sort-and-filters d-flex justify-center">
-        <div class="all-filters d-flex space-between">
-            <div class="filters d-flex">
+        <div class="all-filters d-flex space-between flex-col-mobile">
+            <div class="filters d-flex flex-col-mobile">
                 <select name="filter-categories" id="filter-categories">
                     <option value="">CATÉGORIE</option>
                     <?php 
@@ -62,10 +62,9 @@
             <div class="sort">
                 <select name="sort-by" id="sort-by">
                     <option value="">TRIER PAR</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select> 
+                    <option value="asc">Du plus ancien au plus récent</option>
+                    <option value="desc">Du plus récent au plus ancien</option>
+                </select>
             </div>
         </div>
     </div>
