@@ -1,12 +1,12 @@
 <?php
-// ajout d'images mises en avant
+// ***** ajout d'images mises en avant *****
 function nathalie_mota_theme_setup() {
     add_theme_support( 'post-thumbnails' );
     add_theme_support( 'post-thumbnails', array( 'post', 'page', 'photo' ) );
 }
 add_action( 'after_setup_theme', 'nathalie_mota_theme_setup' );
 
-// définitions des styles
+// ***** définitions des styles *****
 function nathalie_mota_enqueue_styles() {
     wp_enqueue_style( 'nathalie-mota-style', get_template_directory_uri() . '/style.css' );
     wp_enqueue_style( 'ggl-font-space-mono', 'https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap', array(), null );
@@ -14,16 +14,16 @@ function nathalie_mota_enqueue_styles() {
 }
 add_action( 'wp_enqueue_scripts', 'nathalie_mota_enqueue_styles' );
 
-// définitions des scripts
+// ***** définitions des scripts *****
 function nathalie_mota_enqueue_scripts() {
     wp_enqueue_script( 'custom-script', get_template_directory_uri() . '/assets/js/script.js', array(), '1.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'nathalie_mota_enqueue_scripts' );
 
-// titres dynamiques
+// ***** titres dynamiques *****
 add_theme_support('title-tag');
 
-// gestion des menus
+// ***** gestion des menus *****
 function nathalie_mota_register_nav_menu() {
     register_nav_menu( 'primary', __( 'Primary Menu', 'nathalie-mota' ) );
     register_nav_menu( 'footer', __( 'Footer Menu', 'nathalie-mota' ) );
@@ -40,7 +40,7 @@ function add_custom_menu_item( $items, $args ) {
 }
 add_filter( 'wp_nav_menu_items', 'add_custom_menu_item', 10, 2 );
 
-// chargement des photos supplémentaires sur la page d'accueil
+// ***** chargement des photos supplémentaires sur la page d'accueil *****
 function load_more_photos() {
     $offset = $_POST['offset'];
     $args = array(
@@ -55,7 +55,8 @@ function load_more_photos() {
             $more_photos->the_post();
             get_template_part('template_parts/photo_block');
         }
-    } 
+    }
+    // restaure l'état d'origine pour faire fonctionner les autres requêtes correctement 
     wp_reset_postdata();
     wp_die();
 }
@@ -63,21 +64,25 @@ add_action('wp_ajax_load_more_photos', 'load_more_photos');
 add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
 
 
-// Filtrage des photos de la page d'accueil
+// ***** Filtrage des photos de la page d'accueil *****
 function get_posts_by_term() {
+    // récupère les valeurs des select
     $categorie_terms = sanitize_text_field($_GET['categorie_terms']);
     $format_terms = sanitize_text_field($_GET['format_terms']);
     $sort_by = sanitize_text_field($_GET['sort_by']);
     $args = array(
         'post_type' => 'photo',
         'posts_per_page' => 999,
-        'offset' => 0,
+        'offset' => 0, // ne zappe aucune photo
         'orderby' => 'date',
         'tax_query' => array(
             'relation' => 'AND',
         ),
     );
+
+    // si la valeur du select n'est pas vide, c'est que l'utilisateur l'a sélectionné
     if (!empty($categorie_terms)) {
+        // ajoute les éléments de la catégorie sélectionnée au tableau tax_query
         $args['tax_query'][] = array(
             'taxonomy' => 'categorie',
             'field' => 'name',
@@ -85,6 +90,7 @@ function get_posts_by_term() {
         );
     }
     if (!empty($format_terms)) {
+        // ajoute les éléments du format sélectionné au tableau tax_query
         $args['tax_query'][] = array(
             'taxonomy' => 'format',
             'field' => 'name',
@@ -92,11 +98,14 @@ function get_posts_by_term() {
         );
     }
     if (!empty($sort_by)) {
+        // défini l'ordre des postes en fonction de ce qui a été choisi par l'utilisateur dans le select
         $args['order'] = $sort_by;
     }
 
+    // crée la requête avec les arguments définis ci dessus
     $query = new WP_Query($args);
 
+    // affiche les photos correspondant à la requête
     if ($query->have_posts()) {
         while ($query->have_posts()) {
             $query->the_post();
@@ -107,14 +116,14 @@ function get_posts_by_term() {
             <p>Il n\'y a pas de photo à afficher avec ce filtrage, essayez autre chose.</p>
         </div>';
     }
-
+    // restaure l'état d'origine pour faire fonctionner les autres requêtes correctement
     wp_reset_postdata();
     wp_die();
 }
 add_action('wp_ajax_get_posts_by_term', 'get_posts_by_term');
 add_action('wp_ajax_nopriv_get_posts_by_term', 'get_posts_by_term');
 
-// Récupérer tous les posts
+// ***** Récupérer tous les posts *****
 function get_all_posts() {
     $args = array(
         'post_type' => 'photo',
@@ -128,7 +137,7 @@ function get_all_posts() {
             get_template_part('template_parts/photo_block');
         }
     }
-
+    // restaure l'état d'origine pour faire fonctionner les autres requêtes correctement
     wp_reset_postdata();
     wp_die();
 }

@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    //fermeture
+    // fermeture
     const popUp = document.querySelector('.pop-up-overlay');
     const popUpContent = document.querySelector('.pop-up');
     function closePopUp () {
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const toggleButton = document.querySelector('.toggle-btn');
     toggleButton.addEventListener('click', closePopUp);
     popUpContent.addEventListener('click', function(event) {
-        event.stopPropagation();
+        event.stopPropagation(); // pour éviter que le click sur le formulaire ne ferme la modale
     });
 
     // ***** GESTION BURGER MENU : *****
@@ -56,10 +56,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ***** GESTION DES IMAGES SUR LA PAGE D ACCUEIL : *****
     // Charger plu d'images :
-    let offset = 8; 
+    let offset = 8;  // nombres de posts déjà chargés sur la page
     let morePosts = true;
     const morePostsButtons = document.querySelectorAll('.load-btn');
     const load = document.querySelector('.load');
+
     function loadMore() {
         if(morePosts) {
             fetch(ajaxurl, {
@@ -70,15 +71,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 body: 'action=load_more_photos&offset=' + offset
             })
+            // réponse de la promesse retournée par la requête AJAX
             .then(response => response.text())
             .then(data => {
-                if (data.trim() === '') {
+                if (data.trim() === '') { // si réponse vide (il n'y a plus de posts à afficher)
                     morePosts = false;
                     morePostsButtons.forEach(button => {
                         button.style.display = 'none';
                     });
                     load.innerHTML += '<p> Il n\'y a plus de photo à afficher</p>';
-                } else {
+                } else { // il y a des posts à afficher
                     const photosList = document.querySelector('.photos-list');
                     photosList.innerHTML += data;
                     offset += 8;
@@ -105,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const selectedFormat = filterFormats.value;
         const selectedSort = filterSort.value;
     
+        // construction de l'URL pour la requête AJAX en fonction des param choisis par l'utilisateur
         let url = `${ajaxurl}?action=get_posts_by_term&sort_by=${selectedSort}`;
         if (selectedCategorie !== '') {
             url += `&categorie_terms=${selectedCategorie}`;
@@ -114,6 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     
         fetch(url)
+            // réponse de la promesse retournée par la requête AJAX
             .then(response => response.text())
             .then(data => {
                 const photosList = document.querySelector('.photos-list');
@@ -124,6 +128,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     button.style.display = 'block';
                 });
                 load.innerHTML = '';
-            });
+        });
     }
 });
