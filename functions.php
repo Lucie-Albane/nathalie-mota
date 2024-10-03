@@ -40,28 +40,51 @@ function add_custom_menu_item( $items, $args) {
 }
 add_filter('wp_nav_menu_items', 'add_custom_menu_item', 10, 2);
 
-// ***** chargement des photos supplémentaires sur la page d'accueil *****
-function load_more_photos() {
-    $offset = $_POST['offset'];
+// ***** Chargement des photos avec filtres et pagination *****
+function load_photos() {
+    $offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0; // récupère l'offset
     $args = array(
         'post_type' => 'photo',
         'posts_per_page' => 8,
         'offset' => $offset,
+        'orderby' => 'date',
     );
-    $more_photos = new WP_Query($args);
 
-    if ($more_photos->have_posts()) {
-        while ($more_photos->have_posts()) {
-            $more_photos->the_post();
+    // Récupération des filtres
+    if (!empty($_GET['categorie_terms'])) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'categorie',
+            'field' => 'name',
+            'terms' => sanitize_text_field($_GET['categorie_terms']),
+        );
+    }
+
+    if (!empty($_GET['format_terms'])) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'format',
+            'field' => 'name',
+            'terms' => sanitize_text_field($_GET['format_terms']),
+        );
+    }
+
+    if (!empty($_GET['sort_by'])) {
+        $args['order'] = sanitize_text_field($_GET['sort_by']);
+    }
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
             get_template_part('template_parts/photo_block');
         }
     }
-    // restaure l'état d'origine pour faire fonctionner les autres requêtes correctement 
+
     wp_reset_postdata();
     wp_die();
 }
-add_action('wp_ajax_load_more_photos', 'load_more_photos');
-add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
+add_action('wp_ajax_load_photos', 'load_photos');
+add_action('wp_ajax_nopriv_load_photos', 'load_photos');
 
 
 // ***** Filtrage des photos de la page d'accueil *****
@@ -72,7 +95,7 @@ function get_posts_by_term() {
     $sort_by = sanitize_text_field($_GET['sort_by']);
     $args = array(
         'post_type' => 'photo',
-        'posts_per_page' => 999,
+        'posts_per_page' => 8,
         'offset' => 0, // ne zappe aucune photo
         'orderby' => 'date',
         'tax_query' => array(
@@ -111,10 +134,6 @@ function get_posts_by_term() {
             $query->the_post();
             get_template_part('template_parts/photo_block');
         }
-    } else {
-        echo '<div class="load d-flex justify-center">
-            <p>Il n\'y a pas de photo à afficher avec ce filtrage, essayez autre chose.</p>
-        </div>';
     }
     // restaure l'état d'origine pour faire fonctionner les autres requêtes correctement
     wp_reset_postdata();
@@ -127,7 +146,7 @@ add_action('wp_ajax_nopriv_get_posts_by_term', 'get_posts_by_term');
 function get_all_posts() {
     $args = array(
         'post_type' => 'photo',
-        'posts_per_page' => 999,
+        'posts_per_page' => 8,
     );
     $query = new WP_Query($args);
 

@@ -571,3 +571,6 @@ a, a:visited, a:hover{
 .sort-and-filters {
     margin: 40px 0 20px 0;
 }
+.display-msg {
+    display: block;
+}

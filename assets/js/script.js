@@ -54,80 +54,81 @@ document.addEventListener('DOMContentLoaded', function () {
     burgerMenu.addEventListener('click', openBurgerMenu);
 
 
+   
     // ***** GESTION DES IMAGES SUR LA PAGE D ACCUEIL : *****
-    // Charger plu d'images :
-    let offset = 8;  // nombres de posts déjà chargés sur la page
+    let offset = 8;  // nombre de posts déjà chargés sur la page
     let morePosts = true;
-    const morePostsButtons = document.querySelectorAll('.load-btn');
-    const load = document.querySelector('.load');
+    const morePostsButton = document.getElementById('more_posts');
+    const displayMsg = document.querySelector('.display-msg');
+    displayMsg.style.display = 'none';
 
-    function loadMore() {
-        if(morePosts) {
-            fetch(ajaxurl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Cache-Control': 'no-cache'
-                },
-                body: 'action=load_more_photos&offset=' + offset
-            })
-            // réponse de la promesse retournée par la requête AJAX
+    // Fonction unique pour charger les photos
+    function loadPhotos(isLoadMore = false) {
+        
+        const selectedCategorie = document.getElementById('filter-categories').value;
+        const selectedFormat = document.getElementById('filter-formats').value;
+        const selectedSort = document.getElementById('sort-by').value;
+
+        // construction de l'URL pour la requête AJAX
+        let url = `${ajaxurl}?action=load_photos&offset=${isLoadMore ? offset : 0}`;
+    
+        // Ajout des paramètres de filtre
+        if (selectedCategorie !== '') {
+            url += `&categorie_terms=${encodeURIComponent(selectedCategorie)}`;
+        }
+        if (selectedFormat !== '') {
+            url += `&format_terms=${encodeURIComponent(selectedFormat)}`;
+        }
+        if (selectedSort !== '') {
+            url += `&sort_by=${encodeURIComponent(selectedSort)}`;
+        }
+
+        fetch(url)
             .then(response => response.text())
             .then(data => {
                 if (data.trim() === '') { // si réponse vide (il n'y a plus de posts à afficher)
                     morePosts = false;
-                    morePostsButtons.forEach(button => {
-                        button.style.display = 'none';
-                    });
-                    load.innerHTML += '<p> Il n\'y a plus de photo à afficher</p>';
+                    morePostsButton.style.display = 'none';
+                    displayMsg.style.display = 'block';
                 } else { // il y a des posts à afficher
                     const photosList = document.querySelector('.photos-list');
-                    photosList.innerHTML += data;
-                    offset += 8;
+                    if (!isLoadMore) {
+                        // Si ce n'est pas un chargement de plus, on remplace le contenu
+                        photosList.innerHTML = data; 
+                    } else {
+                        // Sinon, on ajoute les nouvelles photos
+                        photosList.innerHTML += data;
+                    }
+                    offset += 8; // Incrémente l'offset de 8
+                    morePostsButton.style.display = 'block';
+                    displayMsg.style.display = 'none';
                 }
             });
-        }
     }
 
-    morePostsButtons.forEach(button => {
-        button.addEventListener('click', loadMore);
+    // Écouteur pour le bouton "Charger plus"
+    morePostsButton.addEventListener('click', () => loadPhotos(true));
+
+    // Écouteurs pour les filtres
+    document.getElementById('filter-categories').addEventListener('change', () => {
+        offset = 8; 
+        morePosts = true; 
+        morePostsButton.style.display = 'block'; 
+        displayMsg.style.display = 'none';
+        loadPhotos(); 
     });
-
-    // Gestion des filtres :
-    const filterCategories = document.getElementById('filter-categories');
-    const filterFormats = document.getElementById('filter-formats');
-    const filterSort = document.getElementById('sort-by');
-    
-    filterCategories.addEventListener('change', updatePhotos);
-    filterFormats.addEventListener('change', updatePhotos);
-    filterSort.addEventListener('change', updatePhotos);
-    
-    function updatePhotos() {
-        const selectedCategorie = filterCategories.value;
-        const selectedFormat = filterFormats.value;
-        const selectedSort = filterSort.value;
-    
-        // construction de l'URL pour la requête AJAX en fonction des param choisis par l'utilisateur
-        let url = `${ajaxurl}?action=get_posts_by_term&sort_by=${selectedSort}`;
-        if (selectedCategorie !== '') {
-            url += `&categorie_terms=${selectedCategorie}`;
-        }
-        if (selectedFormat !== '') {
-            url += `&format_terms=${selectedFormat}`;
-        }
-    
-        fetch(url)
-            // réponse de la promesse retournée par la requête AJAX
-            .then(response => response.text())
-            .then(data => {
-                const photosList = document.querySelector('.photos-list');
-                photosList.innerHTML = data;
-                offset = 8;
-                morePosts = true;
-                morePostsButtons.forEach(button => {
-                    button.style.display = 'block';
-                });
-                load.innerHTML = '';
-        });
-    }
+    document.getElementById('filter-formats').addEventListener('change', () => {
+        offset = 8; 
+        morePosts = true;
+        morePostsButton.style.display = 'block';
+        displayMsg.style.display = 'none';
+        loadPhotos();
+    });
+    document.getElementById('sort-by').addEventListener('change', () => {
+        offset = 8; 
+        morePosts = true; 
+        morePostsButton.style.display = 'block'; 
+        displayMsg.style.display = 'none';
+        loadPhotos(); 
+    });
 });
