@@ -27,6 +27,9 @@ Text Domain: nathalie-mota
 .align-center {
     align-items: center;
 }
+.flex-end {
+    justify-content: flex-end;
+}
 @media only screen and (max-width: 767px) {
     .flex-col-mobile {
         flex-direction: column;
@@ -470,14 +473,21 @@ img, .wp-block-image img {
     margin: 0;
     text-transform: uppercase;
 }
-.photo-block img {
-    width: 565px;
-    height: 565px;
+.photo-block img, .lightbox-image {
+    width: 560px;
+    height: 560px;
     object-fit: cover;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
     .photo-block img {
-        width: 100%;
+        width: 100% !important;
+        height: 100% !important;
+    }
+}
+@media only screen and (max-width: 1024px) {
+    .photo-block img {
+        width: 420px;
+        height: 420px;
     }
 }
 a, a:visited, a:hover{
@@ -523,7 +533,7 @@ a, a:visited, a:hover{
     text-align: center;
 }
 .filters-and-photos {
-    width: 96%;
+    width: 1200px;
     margin: auto;
 }
 .filters-and-photos select {
@@ -554,23 +564,72 @@ a, a:visited, a:hover{
 .filters {
     margin-left: 20px;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
     .sort, .filters {
         margin: 0;
     }
     .all-filters {
         align-items: center;
+        flex-direction: column;
+    }
+    .filters {
+        align-items: center;
+        flex-direction: column;
     }
     #filter-categories {
-        margin: 0;
+        margin: 0 !important;
     }
+
     .all-filters select, .filters select {
         margin-bottom: 20px !important;
+    }
+
+}
+@media only screen and (max-width: 1024px) {
+    .all-filters {
+        margin: auto;
+    }
+    #filter-categories {
+        margin: 0 !important;
     }
 }
 .sort-and-filters {
     margin: 40px 0 20px 0;
+    width: 100%;
 }
 .display-msg {
     display: block;
+}
+@media only screen and (max-width: 1200px) {
+    .filters-and-photos {
+        width: 90%;
+    }
+    .all-filters select, .filters select {
+        margin-bottom: 20px !important;
+    }
+    
+}
+@media only screen and (max-width: 767px) {
+    .filters-and-photos {
+        width: 95%;
+    }
+}
+.lightbox-overlay {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .9);
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    font-family: 'Space Mono';
+    color: #fff;
+}
+.lightbox-nav{
+    position: absolute;
+    top: 50%;
+    width: 100%;
+}
+.lightbox-img {
+    width: 100%;
 }

@@ -52,8 +52,6 @@ document.addEventListener('DOMContentLoaded', function () {
         burgerMenu.classList.toggle('open');
     };
     burgerMenu.addEventListener('click', openBurgerMenu);
-
-
    
     // ***** GESTION DES IMAGES SUR LA PAGE D ACCUEIL : *****
     let offset = 8;  // nombre de posts déjà chargés sur la page
@@ -110,21 +108,21 @@ document.addEventListener('DOMContentLoaded', function () {
     morePostsButton.addEventListener('click', () => loadPhotos(true));
 
     // Écouteurs pour les filtres
-    document.getElementById('filter-categories').addEventListener('change', () => {
+    document.getElementById('filter-categories').addEventListener('change', function() {
         offset = 8; 
         morePosts = true; 
         morePostsButton.style.display = 'block'; 
         displayMsg.style.display = 'none';
         loadPhotos(); 
     });
-    document.getElementById('filter-formats').addEventListener('change', () => {
+    document.getElementById('filter-formats').addEventListener('change', function() {
         offset = 8; 
         morePosts = true;
         morePostsButton.style.display = 'block';
         displayMsg.style.display = 'none';
         loadPhotos();
     });
-    document.getElementById('sort-by').addEventListener('change', () => {
+    document.getElementById('sort-by').addEventListener('change', function() {
         offset = 8; 
         morePosts = true; 
         morePostsButton.style.display = 'block'; 
@@ -132,3 +130,5 @@ document.addEventListener('DOMContentLoaded', function () {
         loadPhotos(); 
     });
 });
+
+

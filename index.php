@@ -24,7 +24,7 @@
 </div>
 
 <div class="filters-and-photos d-flex flex-col">
-    <div class="sort-and-filters d-flex justify-center">
+    <div class="sort-and-filters d-flex space-between">
         <div class="all-filters d-flex space-between flex-col-mobile">
             <div class="filters d-flex flex-col-mobile">
                 <select name="filter-categories" id="filter-categories">
@@ -69,7 +69,7 @@
         </div>
     </div>
 
-    <div class="photos-list d-flex space-between">
+    <div class="photos-list d-flex justify-center">
         <?php $args = array (
 		    'post_type' => 'photo',
             'posts_per_page' => 8,

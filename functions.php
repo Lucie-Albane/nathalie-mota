@@ -2,7 +2,7 @@
 // ***** ajout d'images mises en avant *****
 function nathalie_mota_theme_setup() {
     add_theme_support('post-thumbnails');
-    add_theme_support('post-thumbnails', array('post', 'page', 'photo') );
+    add_theme_support('post-thumbnails', array('post', 'page', 'photo'));
 }
 add_action('after_setup_theme', 'nathalie_mota_theme_setup');
 
@@ -17,6 +17,7 @@ add_action('wp_enqueue_scripts', 'nathalie_mota_enqueue_styles');
 // ***** définitions des scripts *****
 function nathalie_mota_enqueue_scripts() {
     wp_enqueue_script('custom-script', get_template_directory_uri() . '/assets/js/script.js', array(), '1.0', true);
+    wp_enqueue_script('lightbox', get_template_directory_uri() . '/assets/js/lightbox.js', array(), '1.0', true);
 }
 add_action( 'wp_enqueue_scripts', 'nathalie_mota_enqueue_scripts' );
 
