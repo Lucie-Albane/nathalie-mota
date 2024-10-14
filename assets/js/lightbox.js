@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
     const lightbox = document.querySelector('.lightbox-overlay');
-    //const openLightBoxIcons = document.querySelectorAll('.fullscreen');
     const lightboxImage = document.querySelector('.lightbox-image');
     const closeLightBoxIcon = document.querySelector('.lightbox-close');
     const photosList = document.querySelector('.photos-list');
@@ -9,9 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
     let images = [];
     let currentIndex = -1;
 
-    // gestion des références et catégories
+    // gestion des titres, références et catégories
     const lightboxRef = document.querySelector('.lightbox-ref');
     const lightboxCategory = document.querySelector('.lightbox-categorie');
+    const lightboxTitle = document.querySelector('.lightbox-title');
 
     // ouvre la lightbox avec un tableau d'images et un index spécifique
     function openLightBox(imageIndex, imagesArray) {
@@ -21,14 +21,16 @@ document.addEventListener('DOMContentLoaded', function () {
         // affiche l'image correspondant à l'index courant
         lightboxImage.src = images[currentIndex];
 
-        // récupère les données de ref et catégorie
+        // récupère les données de titres, de ref et de catégorie
         const currentIcon = photosList.querySelectorAll('.fullscreen')[currentIndex];
         const currentRef = currentIcon.getAttribute('data-ref');
         const currentCategory = currentIcon.getAttribute('data-category');
+        const currentTitle = currentIcon.getAttribute('data-title');
 
-        // mise à jour des ref et catégorie dans la lightbox
+        // mise à jour des titres, ref et catégorie dans la lightbox
         lightboxRef.textContent = currentRef;
         lightboxCategory.textContent = currentCategory;
+        lightboxTitle.textContent = currentTitle;
 
         lightbox.style.display = 'flex';
         updateNavButtons();
@@ -75,14 +77,16 @@ document.addEventListener('DOMContentLoaded', function () {
             currentIndex--;
             lightboxImage.src = images[currentIndex];
 
-            // mise à jour des ref et catégorie de l'image précédente
+            // mise à jour des titres, ref et catégorie de l'image précédente
             const currentIcon = photosList.querySelectorAll('.fullscreen')[currentIndex];
             const currentRef = currentIcon.getAttribute('data-ref');
             const currentCategory = currentIcon.getAttribute('data-category');
+            const currentTitle = currentIcon.getAttribute('data-title');
 
             // mise à jour des ref et catégorie dans la lightbox
             lightboxRef.textContent = currentRef;
             lightboxCategory.textContent = currentCategory; 
+            lightboxTitle.textContent = currentTitle;
             updateNavButtons();
         }
     }
@@ -93,14 +97,16 @@ document.addEventListener('DOMContentLoaded', function () {
             currentIndex++;
             lightboxImage.src = images[currentIndex];
 
-            // mise à jour des ref et catégorie de l'image précédente
+            // mise à jour des titres, ref et catégorie de l'image précédente
             const currentIcon = photosList.querySelectorAll('.fullscreen')[currentIndex];
             const currentRef = currentIcon.getAttribute('data-ref');
             const currentCategory = currentIcon.getAttribute('data-category');
+            const currentTitle = currentIcon.getAttribute('data-title');
 
             // mise à jour des ref et catégorie dans la lightbox
             lightboxRef.textContent = currentRef;
             lightboxCategory.textContent = currentCategory;
+            lightboxTitle.textContent = currentTitle;
             updateNavButtons();
         }
     }

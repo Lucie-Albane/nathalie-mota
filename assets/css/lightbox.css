@@ -24,7 +24,11 @@
     height: 100vh; 
     pointer-events: none; 
 }
-
+.lightbox-title {
+    margin-top: 20px;
+    font-size: 30px;
+    text-align: center;
+}
 .lightbox-close, .lightbox-precedent, .lightbox-suivant, .lightbox-ref, .lightbox-categorie {
     pointer-events: auto; 
 }
@@ -33,6 +37,7 @@
     width: 100%;
     height: 100%;
     overflow-y: auto; 
+    margin-top: 10%;
 }
 
 .lightbox-image {
@@ -48,6 +53,8 @@
     top: 50px;
     right: 50px;
     z-index: 13;
+    width: 35px;
+    height: auto;
 }
 .lightbox-precedent, .lightbox-suivant {
     position: absolute;

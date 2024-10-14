@@ -10,6 +10,9 @@
     // Récupère l'URL de l'image
     $image_url = get_the_post_thumbnail_url();
 
+    // Récupère le titre de la photo
+    $image_title = get_the_title();
+
     // Récupère les posts précédents et suivants
     $previous_post = get_previous_post();
     $next_post = get_next_post();
@@ -41,6 +44,7 @@
             data-next-url="<?php echo $next_post_url; ?>"
             data-ref="<?php echo $reference_value; ?>"
             data-category="<?php echo get_the_terms(get_the_ID(), 'categorie')[0]->name; ?>"
+            data-title="<?php echo $image_title; ?>"
             >
             </div>
         </div>

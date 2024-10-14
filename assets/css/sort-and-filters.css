@@ -21,6 +21,7 @@
 #filter-categories {
     margin-right: 50px;
 }
+
 .all-filters {
     width: 100%;
 }
@@ -29,6 +30,9 @@
 }
 .filters {
     margin-left: 20px;
+}
+.filters select option:hover {
+    background-color: #E00000;
 }
 @media only screen and (max-width: 768px) {
     .sort, .filters {

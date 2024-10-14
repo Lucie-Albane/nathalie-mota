@@ -59,7 +59,6 @@
                     ?>
                 </select> 
             </div>
-            <div class="sort">
                 <select name="sort-by" id="sort-by">
                     <option value="">TRIER PAR</option>
                     <option value="asc">Du plus ancien au plus récent</option>

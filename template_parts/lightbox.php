@@ -1,6 +1,7 @@
 <div class="lightbox-overlay justify-center align-center">
     <div class="lightbox-controls d-flex flex-col space-between">
-        <div class="lightbox-close pointer">FERMER</div>
+        <div class="lightbox-title">TITRE DE LA PHOTO</div>
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/popup_close.png" class="lightbox-close pointer" alt="Fermer la modale">
         <div class="lightbox-nav">
             <div class="lightbox-precedent pointer">Précédente</div>
             <div class="lightbox-suivant pointer">Suivante</div>

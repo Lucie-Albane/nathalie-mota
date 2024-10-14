@@ -7,7 +7,7 @@
 }
 @media only screen and (max-width: 767px) {
     .photo-block{
-        margin: 10px !important;
+        margin: 10px 0 !important;
         width: 100%;
     }
 }
@@ -66,12 +66,6 @@
     object-fit: cover;
 }
 
-@media only screen and (max-width: 768px) {
-    .photo-block img {
-        width: 100% !important;
-        height: 100% !important;
-    }
-}
 @media only screen and (max-width: 1024px) {
     .photo-block img {
         width: 420px;

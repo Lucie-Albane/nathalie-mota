@@ -67,6 +67,9 @@
     .primary-navigation {
         display: none;
     }
+    .footer-wrapper {
+        margin-top: 25px;
+    }
 }
 .primary-menu-mobile .menu {
     display: flex;
@@ -95,9 +98,9 @@
 }
 .burger-menu {
     position: relative;
-    width: 50px;
-    height: 50px;
-    background-image: url(assets/images/burger_open.png);
+    width: 40px;
+    height: 4cap;
+    background-image: url(../images/burger_open.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -105,7 +108,7 @@
     transition: all .2s ease-in-out;
 }
 .burger-menu.open {
-    background-image: url(assets/images/burger_close.png);
+    background-image: url(../images/burger_close.png);
     transition: all .2s ease-in-out;
   }
 .primary-menu-mobile .menu li, .primary-menu-mobile .menu li:visited {
