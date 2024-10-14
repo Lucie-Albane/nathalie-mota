@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Fonction unique pour charger les photos
     function loadPhotos(isLoadMore = false) {
-        
         const selectedCategorie = document.getElementById('filter-categories').value;
         const selectedFormat = document.getElementById('filter-formats').value;
         const selectedSort = document.getElementById('sort-by').value;

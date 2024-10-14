@@ -8,7 +8,37 @@ add_action('after_setup_theme', 'nathalie_mota_theme_setup');
 
 // ***** définitions des styles *****
 function nathalie_mota_enqueue_styles() {
-    wp_enqueue_style('nathalie-mota-style', get_template_directory_uri() . '/style.css' );
+    // style global
+    wp_enqueue_style('nathalie-mota-style', get_template_directory_uri() . '/style.css');
+
+    // lightbox style
+    wp_enqueue_style('lightbox-style', get_template_directory_uri() . '/assets/css/lightbox.css');
+
+    // filtres et tri style
+    wp_enqueue_style('sort-and-filters', get_template_directory_uri() . '/assets/css/sort-and-filters.css');
+
+    // liste des photos style
+    wp_enqueue_style('photos-list', get_template_directory_uri() . '/assets/css/photos-list.css');
+
+    // hero header style
+    wp_enqueue_style('hero-header', get_template_directory_uri() . '/assets/css/hero-header.css');
+
+    // photo block style
+    wp_enqueue_style('photo-block', get_template_directory_uri() . '/assets/css/photo-block.css');
+
+    // single photo style (CPT photo single)
+    wp_enqueue_style('single-photo', get_template_directory_uri() . '/assets/css/single-photo.css');
+
+    // header & footer style
+    wp_enqueue_style('header-footer', get_template_directory_uri() . '/assets/css/header-footer.css');
+
+    // contact pop-up style
+    wp_enqueue_style('contact-popup', get_template_directory_uri() . '/assets/css/contact-popup.css');
+
+
+
+
+
     wp_enqueue_style('ggl-font-space-mono', 'https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap', array(), null);
     wp_enqueue_style('ggl-font-poppins', 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap', array(), null);
 }

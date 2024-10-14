@@ -1,0 +1,82 @@
+.filters-and-photos {
+    width: 1200px;
+    margin: auto;
+}
+.filters-and-photos select {
+    font-family: 'Poppins';
+    width: 260px;
+    height: 45px;
+    border-radius: 8px;
+    border: 1px solid #B8BBC2;
+    padding: 10px;
+    -moz-appearance:none; 
+    -webkit-appearance:none; 
+    appearance:none;
+    position: relative;
+    background-image: url(../images/expand.png);
+    background-size: 6%;
+    background-repeat: no-repeat;
+    background-position: 95%;
+}
+#filter-categories {
+    margin-right: 50px;
+}
+.all-filters {
+    width: 100%;
+}
+.sort {
+    margin-right: 20px;
+}
+.filters {
+    margin-left: 20px;
+}
+@media only screen and (max-width: 768px) {
+    .sort, .filters {
+        margin: 0;
+    }
+    .all-filters {
+        align-items: center;
+        flex-direction: column;
+    }
+    .filters {
+        align-items: center;
+        flex-direction: column;
+    }
+    #filter-categories {
+        margin: 0 !important;
+    }
+
+    .all-filters select, .filters select {
+        margin-bottom: 20px !important;
+    }
+
+}
+@media only screen and (max-width: 1024px) {
+    .all-filters {
+        margin: auto;
+    }
+    #filter-categories {
+        margin: 0 !important;
+    }
+}
+.sort-and-filters {
+    margin: 40px 0 20px 0;
+    width: 100%;
+}
+.display-msg {
+    display: block;
+}
+@media only screen and (max-width: 1200px) {
+    .filters-and-photos {
+        width: 90%;
+    }
+    .all-filters select, .filters select {
+        margin-bottom: 20px !important;
+    }
+    
+}
+@media only screen and (max-width: 767px) {
+    .filters-and-photos {
+        width: 95%;
+    }
+}

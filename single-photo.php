@@ -75,17 +75,21 @@
 		
 		$prev_text = 'PRECEDENT';
 		if (is_object($previous_photo)) {
-			$prev_text .= '<span class="post-photo-navigation-thumbnail">' . get_the_post_thumbnail($previous_photo->ID,'thumbnail') . '</span>';
+			$prev_text .= '<img src="' . get_template_directory_uri() . '/assets/images/short_arrow_black.png" class="post-photo-nav-icon prev-nav-icon prev-nav-icon-short">' .
+			'<img src="' . get_template_directory_uri() . '/assets/images/long_arrow_black.png" class="post-photo-nav-icon prev-nav-icon prev-nav-icon-long">'
+			. '<span class="post-photo-navigation-thumbnail">' . get_the_post_thumbnail($previous_photo->ID,'thumbnail') . '</span>';
 		}
 		
 		$next_text = 'SUIVANT';
 		if (is_object($next_photo)) {
-			$next_text .= '<span class="post-photo-navigation-thumbnail">' . get_the_post_thumbnail($next_photo->ID,'thumbnail') . '</span>';
+			$next_text .= '<img src="' . get_template_directory_uri() . '/assets/images/short_arrow_black.png" class="post-photo-nav-icon next-nav-icon next-nav-icon-short">' .
+			'<img src="' . get_template_directory_uri() . '/assets/images/long_arrow_black.png" class="post-photo-nav-icon next-nav-icon next-nav-icon-long">'
+			. '<span class="post-photo-navigation-thumbnail">' . get_the_post_thumbnail($next_photo->ID,'thumbnail') . '</span>';
 		}
 		
 		the_post_navigation( array(
-			'prev_text'  => __( $prev_text ),
 			'next_text'  => __( $next_text ),
+			'prev_text'  => __( $prev_text )
 		) );
 		?>
 		</div>
@@ -110,7 +114,7 @@
 		if ($similar_photos->have_posts()) {
 			echo '<div class="post-photo-similar">
 		<h3>Vous aimerez aussi</h3>
-		<div class="post-photo-similar-images d-flex space-between flex-col-mobile">';
+		<div class="photos-list post-photo-similar-images d-flex space-between flex-col-mobile">';
 			while ($similar_photos->have_posts()) {
 				$similar_photos->the_post();
 	?>

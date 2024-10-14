@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const lightbox = document.querySelector('.lightbox-overlay');
-    const openLightBoxIcons = document.querySelectorAll('.fullscreen');
+    //const openLightBoxIcons = document.querySelectorAll('.fullscreen');
     const lightboxImage = document.querySelector('.lightbox-image');
     const closeLightBoxIcon = document.querySelector('.lightbox-close');
     const photosList = document.querySelector('.photos-list');
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
         currentIndex = imageIndex;  // initialise l'index courant
 
         // affiche l'image correspondant à l'index courant
-        lightboxImage.src = images[currentIndex] || '';  // vérifie que l'image n'est pas null
+        lightboxImage.src = images[currentIndex];
 
         // récupère les données de ref et catégorie
         const currentIcon = photosList.querySelectorAll('.fullscreen')[currentIndex];
@@ -32,6 +32,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         lightbox.style.display = 'flex';
         updateNavButtons();
+
+        // Ajoute la classe qui désactive le défilement du body
+        document.body.classList.add('no-scroll');
+        
     }
 
     function closeLightBox() {
@@ -39,6 +43,8 @@ document.addEventListener('DOMContentLoaded', function () {
         lightboxImage.src = '';
         lightboxRef.textContent = '';
         lightboxCategory.textContent = '';
+        // Supprime la classe qui désactive le défilement du body
+        document.body.classList.remove('no-scroll');
     }
 
     // gestion des btn de nav 

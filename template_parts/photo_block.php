@@ -35,7 +35,7 @@
     <div class="photo-block-overlay d-flex flex-col space-between">
         <div class="fullscreen-icon d-flex">
             <div class="fs-bg d-flex justify-center align-center">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/FS.png" class="fullscreen" alt="Voir en plein écran"
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/FS.png" class="fullscreen pointer" alt="Voir en plein écran"
             data-image="<?php echo $image_url; ?>"
             data-prev-url="<?php echo $previous_post_url; ?>"
             data-next-url="<?php echo $next_post_url; ?>"

@@ -1,0 +1,114 @@
+.footer-wrapper {
+    border-top: 2px solid #000;
+}
+.footer-menu-items {
+    display: flex;
+    justify-content: space-around;
+}
+.footer-menu {
+    width: 50%;
+    margin: auto;
+}
+.header-wrapper {
+    width: 100%;
+    box-shadow: 0px 3px 18px 4px rgba(0,0,0,0.03);
+}
+@media only screen and (max-width: 767px) {
+    .header-wrapper {
+        height: 15vh;
+        justify-content: space-between;
+    }
+}
+.menu, .footer-menu-items{
+    list-style-type: none;
+    display: flex;
+}
+.footer-menu-items {
+    padding: 0;
+}
+@media only screen and (max-width: 767px) {
+    .footer-menu-items {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.menu li, .footer-menu-items li {
+    padding: 15px;
+    font-family: 'Space Mono';
+    cursor: pointer;
+}
+.menu li:hover, .footer-menu-items li:hover {
+    font-weight: 700;
+}
+.primary-menu-list .menu li a, .primary-menu-list .menu li a:visited, .footer-menu-items li a, .footer-menu-items li a:visited {
+    color: #000;
+    text-decoration: none;
+}
+.menu li a:hover, .footer-menu-items li a:hover {
+    text-decoration: none;
+}
+.contact {
+    cursor: pointer;
+}
+.logo {
+    align-self: center;
+    padding-left: 40px;
+}
+.mobile-navigation {
+    position: relative;
+    display: none;
+}
+@media only screen and (max-width: 767px) {
+    .mobile-navigation {
+        display: block;
+    }
+    .primary-navigation {
+        display: none;
+    }
+}
+.primary-menu-mobile .menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.primary-menu-mobile {
+    background-color: #E00000;
+    position: fixed;
+    top: -200%;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all .4s ease-in-out;
+    z-index: 10;
+}
+.active {
+    opacity: 1;
+    top: 15vh;
+    transition: all .5s ease-in-out;
+}
+.burger-menu {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background-image: url(assets/images/burger_open.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 40px;
+    transition: all .2s ease-in-out;
+}
+.burger-menu.open {
+    background-image: url(assets/images/burger_close.png);
+    transition: all .2s ease-in-out;
+  }
+.primary-menu-mobile .menu li, .primary-menu-mobile .menu li:visited {
+    font-size: 44px;
+    color: #fff;
+}

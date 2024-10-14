@@ -1,0 +1,85 @@
+.pop-up-overlay {
+    position: fixed;
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, .8);
+    top: 0;
+    left: -100%;
+    opacity: 0;
+    transition: all 1s ease-in-out;
+    z-index: 10;
+}
+.pop-up {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    margin: auto;
+    background-color: #fff;
+    border: 5px solid #000;
+    z-index: 11;
+}
+@media only screen and (max-width: 767px) {
+    .pop-up {
+        width: 100%;
+    }
+}
+.toggle-btn {
+    position: absolute;
+    right: 5%;
+    top: 5em;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Space Mono';
+    background-color: rgba(0, 0, 0, .6);
+}
+.pop-up .titles-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 6.2em;
+    line-height: 0em;
+    font-size: 2em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.pop-up h2 {
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: 500;
+    font-size: 90px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+.pop-up h2:nth-of-type(2) {
+    top: 1em;
+    left: 55%;
+}
+.wpcf7-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Poppins';
+}
+.wpcf7-form p input, .wpcf7-form p textarea {
+    border-radius: 8px;
+    border: 1px solid #B8BBC2;
+    margin-top: 5px;
+    width: 100%;
+}
+.wpcf7-form p {
+    width: 263px;
+    margin: 5px 0;
+}
+.wpcf7-form p input {
+    height: 40px;
+}
+.wpcf7-form p textarea {
+    height: 170px;
+}
+.wpcf7-form p:last-of-type input {
+    font-family: 'Space Mono';
+    border-radius: 2px;
+    height: 50px;
+    padding: 15px;
+}
