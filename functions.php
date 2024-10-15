@@ -127,7 +127,7 @@ function get_posts_by_term() {
     $args = array(
         'post_type' => 'photo',
         'posts_per_page' => 8,
-        'offset' => 0, // ne zappe aucune photo
+        'offset' => $offset, // utilise l'offset récupéré
         'orderby' => 'date',
         'tax_query' => array(
             'relation' => 'AND',

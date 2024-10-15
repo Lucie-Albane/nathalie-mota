@@ -24,48 +24,65 @@
 </div>
 
 <div class="filters-and-photos d-flex flex-col">
-    <div class="sort-and-filters d-flex space-between">
+    <div class="sort-and-filters d-flex flex-col space-between">
         <div class="all-filters d-flex space-between flex-col-mobile">
             <div class="filters d-flex flex-col-mobile">
-                <select name="filter-categories" id="filter-categories">
-                    <option value="">CATÉGORIE</option>
-                    <?php 
-		                $terms = get_terms( array(
-                            'taxonomy' => 'categorie',
-                            'hide_empty' => false,
-                        ) );
+                <div class="dropdown dropdown-categorie">
+                    <div class="select select-categorie">
+                        <span class="selected">CATEGORIE</span>
+                        <div class="caret"></div>
+                    </div>
+                    <ul class="select-items select-items-categorie">
+                        <li data-value="">CATEGORIE</li>
+                        <?php 
+		                    $terms = get_terms(array(
+                                'taxonomy' => 'categorie',
+                                'hide_empty' => false,
+                            ));
                         
-                        if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
-                            foreach ( $terms as $term ) {
-                                echo '<option value=' . $term->name . '>' . $term->name . '</option>';
+                            if (!empty($terms) && ! is_wp_error($terms)) {
+                                foreach ($terms as $term) {
+                                    echo '<li data-value=' . $term->name . '>' . $term->name . '</li>';
+                                }
                             }
-                        }
-                    ?>
-                </select>
-                
-                <select name="filter-formats" id="filter-formats">
-                    <option value="">FORMATS</option>
-                    <?php 
-		                $terms = get_terms( array(
-                            'taxonomy' => 'format',
-                            'hide_empty' => false,
-                        ) );
+                        ?>
+                    </ul>
+                </div>
+
+                <div class="dropdown dropdown-formats">
+                    <div class="select select-formats">
+                        <span class="selected">FORMATS</span>
+                        <div class="caret"></div>
+                    </div>
+                    <ul class="select-items select-items-formats">
+                        <li data-value="">FORMATS</li>
+                        <?php 
+		                    $terms = get_terms(array(
+                                'taxonomy' => 'format',
+                                'hide_empty' => false,
+                            ));
                         
-                        if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
-                            foreach ( $terms as $term ) {
-                                echo '<option value=' . $term->name . '>' . $term->name . '</option>';
+                            if (!empty($terms) && ! is_wp_error($terms)) {
+                                foreach ($terms as $term) {
+                                    echo '<li data-value=' . $term->name . '>' . $term->name . '</li>';
+                                }
                             }
-                        }
                     ?>
-                </select> 
-            </div>
-                <select name="sort-by" id="sort-by">
-                    <option value="">TRIER PAR</option>
-                    <option value="asc">Du plus ancien au plus récent</option>
-                    <option value="desc">Du plus récent au plus ancien</option>
-                </select>
-            </div>
+                    </ul>
+                </div>
         </div>
+        
+        <div class="dropdown dropdown-sort-by">
+                    <div class="select select-sort-by">
+                        <span class="selected">TRIER PAR</span>
+                        <div class="caret"></div>
+                    </div>
+                    <ul class="select-items select-items-sort-by">
+                        <li data-value="">TRIER PAR</li>
+                        <li data-value="asc">Du plus ancien au plus récent</li>
+                        <li data-value="desc">Du plus récent au plus ancien</li>
+                    </ul>
+                </div>
     </div>
 
     <div class="photos-list d-flex justify-center">

@@ -62,13 +62,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Fonction unique pour charger les photos
     function loadPhotos(isLoadMore = false) {
-        const selectedCategorie = document.getElementById('filter-categories').value;
-        const selectedFormat = document.getElementById('filter-formats').value;
-        const selectedSort = document.getElementById('sort-by').value;
+        const selectedCategorie = document.querySelector('.select-categorie .selected').getAttribute('data-value') || '';
+        const selectedFormat = document.querySelector('.select-formats .selected').getAttribute('data-value') || '';
+        const selectedSort = document.querySelector('.select-sort-by .selected').getAttribute('data-value') || '';
 
-        // construction de l'URL pour la requête AJAX
+        // Construction de l'URL pour la requête AJAX
         let url = `${ajaxurl}?action=load_photos&offset=${isLoadMore ? offset : 0}`;
-    
+
         // Ajout des paramètres de filtre
         if (selectedCategorie !== '') {
             url += `&categorie_terms=${encodeURIComponent(selectedCategorie)}`;
@@ -83,17 +83,15 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch(url)
             .then(response => response.text())
             .then(data => {
-                if (data.trim() === '') { // si réponse vide (il n'y a plus de posts à afficher)
+                if (data.trim() === '') { // Si réponse vide
                     morePosts = false;
                     morePostsButton.style.display = 'none';
                     displayMsg.style.display = 'block';
-                } else { // il y a des posts à afficher
+                } else {
                     const photosList = document.querySelector('.photos-list');
                     if (!isLoadMore) {
-                        // Si ce n'est pas un chargement de plus, on remplace le contenu
                         photosList.innerHTML = data; 
                     } else {
-                        // Sinon, on ajoute les nouvelles photos
                         photosList.innerHTML += data;
                     }
                     offset += 8; // Incrémente l'offset de 8
@@ -106,28 +104,126 @@ document.addEventListener('DOMContentLoaded', function () {
     // Écouteur pour le bouton "Charger plus"
     morePostsButton.addEventListener('click', () => loadPhotos(true));
 
-    // Écouteurs pour les filtres
-    document.getElementById('filter-categories').addEventListener('change', function() {
-        offset = 8; 
-        morePosts = true; 
-        morePostsButton.style.display = 'block'; 
-        displayMsg.style.display = 'none';
-        loadPhotos(); 
+    // ----- DROPDOWNS : ----- 
+    // Fonction pour ouvrir/fermer les dropdowns
+    function toggleDropdown(dropdown) { // dropdown = la liste à ouvrir ou à fermer
+        dropdown.classList.toggle('open');
+        const allDropdowns = document.querySelectorAll('.dropdown');// Ferme les autres dropdowns
+        
+        allDropdowns.forEach((otherDropdown) => { // parmi toutes les listes,
+            if (otherDropdown !== dropdown) { // si otherdropdown n'est pas la liste actuelle,
+                otherDropdown.classList.remove('open'); // on ferme les autres
+            }
+        });
+    }
+
+    // Gestion des clics sur les faux selects
+    const dropdownCategories = document.querySelector('.dropdown-categorie');
+    const dropdownFormats = document.querySelector('.dropdown-formats');
+    const dropdownSortBy = document.querySelector('.dropdown-sort-by');
+
+    dropdownCategories.querySelector('.select').addEventListener('click', function () {
+        toggleDropdown(dropdownCategories);
     });
-    document.getElementById('filter-formats').addEventListener('change', function() {
-        offset = 8; 
-        morePosts = true;
-        morePostsButton.style.display = 'block';
-        displayMsg.style.display = 'none';
-        loadPhotos();
+
+    dropdownFormats.querySelector('.select').addEventListener('click', function () {
+        toggleDropdown(dropdownFormats);
     });
-    document.getElementById('sort-by').addEventListener('change', function() {
-        offset = 8; 
-        morePosts = true; 
-        morePostsButton.style.display = 'block'; 
-        displayMsg.style.display = 'none';
-        loadPhotos(); 
+
+    dropdownSortBy.querySelector('.select').addEventListener('click', function () {
+        toggleDropdown(dropdownSortBy);
+    });
+
+    // Gestion des clics sur les éléments de sélection :
+    // Au clic sur chaque item de la liste
+    dropdownCategories.querySelectorAll('li').forEach(item => {
+        item.addEventListener('click', function () {
+            const value = this.getAttribute('data-value'); // on récup la valeur de l'élément cliqué (this = le li cliqué)
+            dropdownCategories.querySelector('.selected').setAttribute('data-value', value); // on change l'attribut 'data-value' de l'élément sélectionné
+
+            // Met à jour le texte affiché
+            const selectedElement = dropdownCategories.querySelector('.selected'); // Sélectionne l'élément affichant le texte
+            if (value) { // vérifie si value existe
+                selectedElement.innerText = value; // met à jour le texte avec 'value'
+            } else {
+                selectedElement.innerText = 'CATEGORIE';// sinon, met à jour le texte avec 'CATEGORIE'
+            }
+
+            // Réinitialise l'offset et d'autres variables pour charger les photos
+            offset = 0; 
+            morePosts = true; 
+            morePostsButton.style.display = 'block'; 
+            displayMsg.style.display = 'none';
+        
+            // Charge les photos avec les nouveaux filtres
+            loadPhotos(); 
+        
+            // Ferme le dropdown après sélection
+            dropdownCategories.classList.remove('open');
+        });
+    });
+
+    // Au clic sur chaque item de la liste
+    dropdownFormats.querySelectorAll('li').forEach(item => {
+        item.addEventListener('click', function () {
+            const value = this.getAttribute('data-value');
+            dropdownFormats.querySelector('.selected').setAttribute('data-value', value); // on change l'attribut 'data-value' de l'élément sélectionné
+
+            // Met à jour le texte affiché 
+            const selectedElement = dropdownFormats.querySelector('.selected'); // selectionne l'élement affichant le texte
+             if (value) { // vérifie si value existe
+                selectedElement.innerText = value; // met à jour le texte avec 'value'
+            } else {
+                selectedElement.innerText = 'FORMATS'; // sinon, met à jour le texte avec 'FORMATS'
+            }
+
+            // Réinitialise l'offset et d'autres variables pour charger les photos
+            offset = 0; 
+            morePosts = true; 
+            morePostsButton.style.display = 'block'; 
+            displayMsg.style.display = 'none';
+
+            // Charge les photos avec les nouveaux filtres
+            loadPhotos(); 
+
+            // Ferme le dropdown après sélection
+            dropdownFormats.classList.remove('open');
+        });
+    });
+
+    // Au clic sur chaque item de la liste
+    dropdownSortBy.querySelectorAll('li').forEach(item => {
+        item.addEventListener('click', function () {
+            const value = this.getAttribute('data-value');  // on récup la valeur de l'élément cliqué (this = le li cliqué)
+            dropdownSortBy.querySelector('.selected').setAttribute('data-value', value); // on change l'attribut 'data-value' de l'élément sélectionné
+            
+            // Met à jour le texte affiché avec le texte de l'élément sélectionné
+            dropdownSortBy.querySelector('.selected').innerText = this.innerText; 
+
+            // Réinitialise l'offset et d'autres variables pour charger les photos
+            offset = 0; 
+            morePosts = true; 
+            morePostsButton.style.display = 'block'; 
+            displayMsg.style.display = 'none';
+
+            // Charge les photos avec les nouveaux filtres
+            loadPhotos(); 
+
+            // Ferme le dropdown après sélection
+            dropdownSortBy.classList.remove('open'); 
+        });
+    });
+
+    // Ferme les dropdowns quand on clique à l'extérieur
+    // event = element cliqué
+    document.addEventListener('click', function(event)  {
+        // vérifie que l'element cliqué n'est pas une des 3 dropdowns pour qu'elles restent ouvertes lors de l'interaction
+        if (!dropdownCategories.contains(event.target) && !dropdownFormats.contains(event.target) && !dropdownSortBy.contains(event.target)) {
+            // et si ce n'est pas le cas, on retire la classe open pour fermer la liste
+            dropdownCategories.classList.remove('open');
+            dropdownFormats.classList.remove('open');
+            dropdownSortBy.classList.remove('open');
+        }
     });
 });
-
 
