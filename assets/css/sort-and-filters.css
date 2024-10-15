@@ -4,7 +4,7 @@
 }
 .filters-and-photos .select {
     font-family: 'Poppins';
-    width: 260px;
+    width: 280px;
     border-radius: 8px;
     border: 1px solid #B8BBC2;
     padding: 10px;
@@ -61,6 +61,9 @@
 }
 .filters select option:hover {
     background-color: #E00000;
+}
+.selected {
+    text-transform: uppercase;
 }
 @media only screen and (max-width: 768px) {
     .dropdown-sort-by, .filters, .dropdown-categorie {

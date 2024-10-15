@@ -197,8 +197,16 @@ document.addEventListener('DOMContentLoaded', function () {
             const value = this.getAttribute('data-value');  // on récup la valeur de l'élément cliqué (this = le li cliqué)
             dropdownSortBy.querySelector('.selected').setAttribute('data-value', value); // on change l'attribut 'data-value' de l'élément sélectionné
             
-            // Met à jour le texte affiché avec le texte de l'élément sélectionné
-            dropdownSortBy.querySelector('.selected').innerText = this.innerText; 
+            // Met à jour le texte affiché avec le texte de l'élément sélectionné dropdownSortBy.querySelector('.selected').innerText = this.innerText; 
+            
+            // Met à jour le texte affiché 
+            const selectedElement = dropdownSortBy.querySelector('.selected'); // selectionne l'élement affichant le texte
+            // Vérifie si value est vide
+            if (value === "") { 
+                selectedElement.innerText = 'TRIER PAR'; // sinon, met à jour le texte avec 'TRIER PAR'
+            } else {
+                selectedElement.innerText = this.innerText; // met à jour le texte avec l'élément sélectionné
+            }
 
             // Réinitialise l'offset et d'autres variables pour charger les photos
             offset = 0; 

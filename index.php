@@ -30,10 +30,9 @@
                 <div class="dropdown dropdown-categorie">
                     <div class="select select-categorie">
                         <span class="selected">CATEGORIE</span>
-                        <div class="caret"></div>
                     </div>
                     <ul class="select-items select-items-categorie">
-                        <li data-value="">CATEGORIE</li>
+                        <li data-value="">Toutes les catégories</li>
                         <?php 
 		                    $terms = get_terms(array(
                                 'taxonomy' => 'categorie',
@@ -52,10 +51,9 @@
                 <div class="dropdown dropdown-formats">
                     <div class="select select-formats">
                         <span class="selected">FORMATS</span>
-                        <div class="caret"></div>
                     </div>
                     <ul class="select-items select-items-formats">
-                        <li data-value="">FORMATS</li>
+                        <li data-value="">Tous les formats</li>
                         <?php 
 		                    $terms = get_terms(array(
                                 'taxonomy' => 'format',
@@ -73,16 +71,15 @@
         </div>
         
         <div class="dropdown dropdown-sort-by">
-                    <div class="select select-sort-by">
-                        <span class="selected">TRIER PAR</span>
-                        <div class="caret"></div>
-                    </div>
-                    <ul class="select-items select-items-sort-by">
-                        <li data-value="">TRIER PAR</li>
-                        <li data-value="asc">Du plus ancien au plus récent</li>
-                        <li data-value="desc">Du plus récent au plus ancien</li>
-                    </ul>
-                </div>
+            <div class="select select-sort-by">
+                <span class="selected">TRIER PAR</span>
+            </div>
+            <ul class="select-items select-items-sort-by">
+                <li data-value="">Par défaut</li>
+                <li data-value="asc">Du plus ancien au plus récent</li>
+                <li data-value="desc">Du plus récent au plus ancien</li>
+            </ul>
+        </div>
     </div>
 
     <div class="photos-list d-flex justify-center">
