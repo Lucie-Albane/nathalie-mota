@@ -91,9 +91,10 @@
 .post-photo-navigation {
     width: 50%;
     justify-content: flex-end;
-    align-content: flex-end;
     flex-wrap: wrap;
     margin-right: 35px;
+    margin-bottom: 5px;
+    align-self: flex-end;
 }
 @media only screen and (max-width: 767px) {
     .post-photo-navigation {

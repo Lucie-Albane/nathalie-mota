@@ -105,5 +105,5 @@
     <button id="more_posts" class="load-btn">Charger plus</button>
     <p class="display-msg">Il n'y a pas de photo à afficher</p>
 </div>
-</div>
+
 <?php get_footer(); ?>

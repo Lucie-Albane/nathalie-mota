@@ -75,6 +75,16 @@ button {
 button:hover {
     background-color: #000;
     color: #fff;
+    cursor: pointer;
+}
+p {
+    font-family: 'Poppins';
+    font-size: 14px;
+    font-weight: 300;
+}
+.site-page-main {
+    width: 80%;
+    margin: auto;
 }
 @media only screen and (max-width: 767px) {
     h1 {

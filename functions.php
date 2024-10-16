@@ -65,7 +65,7 @@ function add_custom_menu_item( $items, $args) {
     if ($args->theme_location == 'primary') {
         $items .= '<li class="contact">CONTACT</li>';
     } elseif ($args->theme_location == 'footer') {
-        $items .= '<li>TOUS DROITS RÉSERVÉS</li>';
+        $items .= '<li class="no-click">TOUS DROITS RÉSERVÉS</li>';
     }
     return $items;
 }

@@ -60,6 +60,12 @@
     position: relative;
     display: none;
 }
+.no-click {
+    cursor: default !important;
+}
+.no-click:hover {
+    font-weight: 400 !important;
+}
 @media only screen and (max-width: 767px) {
     .mobile-navigation {
         display: block;

@@ -13,7 +13,7 @@
 <?php wp_body_open(); ?>
 <div id="page" class="site">
     <div class="header-wrapper d-flex space-around align-center">
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" class="logo" alt="logo de Nathalie Mota">
+        <a href="<?php echo home_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" class="logo" alt="logo de Nathalie Mota"></a>
 	    <div id="site-navigation" class="primary-navigation">
 		<?php
 		wp_nav_menu( array(
