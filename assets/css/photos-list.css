@@ -1,5 +1,6 @@
 .photos-list {
     flex-wrap: wrap;
+    margin-top: 20px;
 }
 @media only screen and (max-width: 1024px) {
     .photos-list {

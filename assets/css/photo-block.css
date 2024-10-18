@@ -67,7 +67,9 @@
 
 @media only screen and (max-width: 1024px) {
     .photo-block img, .photo-block-overlay {
-        width: 420px;
-        height: 420px;
+        width: 100%;
+    }
+    .photo-block {
+        width: 100%;
     }
 }

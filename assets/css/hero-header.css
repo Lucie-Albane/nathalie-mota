@@ -8,7 +8,7 @@
     -webkit-text-stroke-color: #fff;
 }
 .hero-header figure {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
 }
 .hero-header img {
@@ -24,5 +24,11 @@
     }
     .hero-header figure {
         height: auto;
+    }
+    .logo {
+        padding-left: 10px !important;
+    }
+    .burger-menu {
+        margin-right: 10px !important;
     }
 }

@@ -122,116 +122,46 @@ document.addEventListener('DOMContentLoaded', function () {
     const dropdownFormats = document.querySelector('.dropdown-formats');
     const dropdownSortBy = document.querySelector('.dropdown-sort-by');
 
-    dropdownCategories.querySelector('.select').addEventListener('click', function () {
-        toggleDropdown(dropdownCategories);
-    });
-
-    dropdownFormats.querySelector('.select').addEventListener('click', function () {
-        toggleDropdown(dropdownFormats);
-    });
-
-    dropdownSortBy.querySelector('.select').addEventListener('click', function () {
-        toggleDropdown(dropdownSortBy);
+    const dropdowns = [dropdownCategories, dropdownFormats, dropdownSortBy];
+    dropdowns.forEach(dropdown => {
+        dropdown.querySelector('.select').addEventListener('click', function () {
+            toggleDropdown(dropdown);
+        });
     });
 
     // Gestion des clics sur les éléments de sélection :
-    // Au clic sur chaque item de la liste
-    dropdownCategories.querySelectorAll('li').forEach(item => {
-        item.addEventListener('click', function () {
-            const value = this.getAttribute('data-value'); // on récup la valeur de l'élément cliqué (this = le li cliqué)
-            dropdownCategories.querySelector('.selected').setAttribute('data-value', value); // on change l'attribut 'data-value' de l'élément sélectionné
+    function dropdownSelection(dropdown, dropdownText) {
+        dropdown.querySelectorAll('li').forEach(option => {
+            option.addEventListener('click', function () {
+                const dataValue = this.getAttribute('data-value');
+                const selectedElement = dropdown.querySelector('.selected');
 
-            // Met à jour le texte affiché
-            const selectedElement = dropdownCategories.querySelector('.selected'); // Sélectionne l'élément affichant le texte
-            if (value) { // vérifie si value existe
-                selectedElement.innerText = value; // met à jour le texte avec 'value'
-            } else {
-                selectedElement.innerText = 'CATEGORIE';// sinon, met à jour le texte avec 'CATEGORIE'
-            }
+                // met a jour le data-value et le texte à afficher
+                selectedElement.setAttribute('data-value', dataValue);
+                if (dataValue) {
+                    selectedElement.innerText = this.innerText;
+                } else {
+                    selectedElement.innerText = dropdownText;
+                }
 
-            // Réinitialise l'offset et d'autres variables pour charger les photos
-            offset = 0; 
-            morePosts = true; 
-            morePostsButton.style.display = 'block'; 
-            displayMsg.style.display = 'none';
-        
-            // Charge les photos avec les nouveaux filtres
-            loadPhotos(); 
-        
-            // Ferme le dropdown après sélection
-            dropdownCategories.classList.remove('open');
+                // Réinitialise l'offset et d'autres variables pour charger les photos
+                offset = 0;
+                morePosts = true;
+                morePostsButton.style.display = 'block';
+                displayMsg.style.display = 'none';
+
+                // charge les photos avec les nouveaux filtres
+                loadPhotos();
+
+                // ferme la dropdown apres la selection du filtre
+                dropdown.classList.remove('open');
+            });
         });
-    });
+    }
 
-    // Au clic sur chaque item de la liste
-    dropdownFormats.querySelectorAll('li').forEach(item => {
-        item.addEventListener('click', function () {
-            const value = this.getAttribute('data-value');
-            dropdownFormats.querySelector('.selected').setAttribute('data-value', value); // on change l'attribut 'data-value' de l'élément sélectionné
-
-            // Met à jour le texte affiché 
-            const selectedElement = dropdownFormats.querySelector('.selected'); // selectionne l'élement affichant le texte
-             if (value) { // vérifie si value existe
-                selectedElement.innerText = value; // met à jour le texte avec 'value'
-            } else {
-                selectedElement.innerText = 'FORMATS'; // sinon, met à jour le texte avec 'FORMATS'
-            }
-
-            // Réinitialise l'offset et d'autres variables pour charger les photos
-            offset = 0; 
-            morePosts = true; 
-            morePostsButton.style.display = 'block'; 
-            displayMsg.style.display = 'none';
-
-            // Charge les photos avec les nouveaux filtres
-            loadPhotos(); 
-
-            // Ferme le dropdown après sélection
-            dropdownFormats.classList.remove('open');
-        });
-    });
-
-    // Au clic sur chaque item de la liste
-    dropdownSortBy.querySelectorAll('li').forEach(item => {
-        item.addEventListener('click', function () {
-            const value = this.getAttribute('data-value');  // on récup la valeur de l'élément cliqué (this = le li cliqué)
-            dropdownSortBy.querySelector('.selected').setAttribute('data-value', value); // on change l'attribut 'data-value' de l'élément sélectionné
-            
-            // Met à jour le texte affiché avec le texte de l'élément sélectionné dropdownSortBy.querySelector('.selected').innerText = this.innerText; 
-            
-            // Met à jour le texte affiché 
-            const selectedElement = dropdownSortBy.querySelector('.selected'); // selectionne l'élement affichant le texte
-            // Vérifie si value est vide
-            if (value === "") { 
-                selectedElement.innerText = 'TRIER PAR'; // sinon, met à jour le texte avec 'TRIER PAR'
-            } else {
-                selectedElement.innerText = this.innerText; // met à jour le texte avec l'élément sélectionné
-            }
-
-            // Réinitialise l'offset et d'autres variables pour charger les photos
-            offset = 0; 
-            morePosts = true; 
-            morePostsButton.style.display = 'block'; 
-            displayMsg.style.display = 'none';
-
-            // Charge les photos avec les nouveaux filtres
-            loadPhotos(); 
-
-            // Ferme le dropdown après sélection
-            dropdownSortBy.classList.remove('open'); 
-        });
-    });
-
-    // Ferme les dropdowns quand on clique à l'extérieur
-    // event = element cliqué
-    document.addEventListener('click', function(event)  {
-        // vérifie que l'element cliqué n'est pas une des 3 dropdowns pour qu'elles restent ouvertes lors de l'interaction
-        if (!dropdownCategories.contains(event.target) && !dropdownFormats.contains(event.target) && !dropdownSortBy.contains(event.target)) {
-            // et si ce n'est pas le cas, on retire la classe open pour fermer la liste
-            dropdownCategories.classList.remove('open');
-            dropdownFormats.classList.remove('open');
-            dropdownSortBy.classList.remove('open');
-        }
-    });
+    // définition des labels et gestion des dropdown
+    dropdownSelection(dropdownCategories, 'CATÉGORIE');
+    dropdownSelection(dropdownFormats, 'FORMATS');
+    dropdownSelection(dropdownSortBy, 'TRIER PAR');        
 });
 
