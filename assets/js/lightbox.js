@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Event delegation pour ouvrir la lightbox (l'event remonte dans le DOM)
+    // "Event delegation" pour ouvrir la lightbox (l'event remonte dans le DOM)
     photosList.addEventListener('click', function (event) {
         // vérifie que le click sur photosList provient bien de l'icône fullscreen 
         if (event.target.classList.contains('fullscreen')) {

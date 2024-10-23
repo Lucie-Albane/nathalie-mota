@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Fonction pour ouvrir/fermer les dropdowns
     function toggleDropdown(dropdown) { // dropdown = la liste à ouvrir ou à fermer
         dropdown.classList.toggle('open');
-        const allDropdowns = document.querySelectorAll('.dropdown');// Ferme les autres dropdowns
+        const allDropdowns = document.querySelectorAll('.dropdown');
         
         allDropdowns.forEach((otherDropdown) => { // parmi toutes les listes,
             if (otherDropdown !== dropdown) { // si otherdropdown n'est pas la liste actuelle,
