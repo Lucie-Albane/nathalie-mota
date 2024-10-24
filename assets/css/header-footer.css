@@ -15,7 +15,7 @@
 }
 @media only screen and (max-width: 767px) {
     .header-wrapper {
-        height: 15vh;
+        height: 10vh;
         justify-content: space-between;
     }
 }

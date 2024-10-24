@@ -22,6 +22,10 @@
     .pop-up {
         width: 100%;
     }
+    .toggle-btn {
+        right: 0 !important;
+        top: 5% !important;
+    }
 }
 .toggle-btn {
     position: absolute;

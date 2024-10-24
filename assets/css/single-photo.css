@@ -60,6 +60,9 @@
         width: 100% !important;
         max-width: unset;
     }
+    .post-photo-title {
+        font-size: 38px !important;
+    }
     .post-photo-contact {
         margin-bottom: 25px;
     }
